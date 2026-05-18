@@ -188,6 +188,20 @@
       .iqrb{margin-top:10px}
       .inotes{max-width:none;margin-bottom:10px}
     }
+
+    /* ── Shop Lock System ── */
+    .lock-banner{
+      background:linear-gradient(135deg,#0a0a0a,#251e0a);border:1.5px solid var(--gold);
+      border-radius:11px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;
+      margin-bottom:10px
+    }
+    .lock-banner-txt{color:var(--gold3);font-size:12px;font-weight:800;display:flex;align-items:center;gap:8px}
+    .lock-banner-ico{font-size:18px}
+    .locked-overlay{pointer-events:none;opacity:0.45;user-select:none}
+    .unlock-btn{background:linear-gradient(135deg,var(--gold),var(--gold4));color:#111;border:none;border-radius:9px;
+      padding:8px 14px;font-size:12px;font-weight:900;cursor:pointer;min-height:36px;width:auto;display:inline-flex;align-items:center;gap:5px}
+    .lock-btn{background:#333;color:var(--gold3);border:1px solid var(--gold4);border-radius:9px;
+      padding:8px 14px;font-size:12px;font-weight:900;cursor:pointer;min-height:36px;width:auto;display:inline-flex;align-items:center;gap:5px}
   </style>
 </head>
 <body>
@@ -209,25 +223,36 @@
     <div class="panel" id="pShop">
       <div class="ph" onclick="togglePanel('pShop')"><span class="ph-ttl" data-k="shop">Shop Info</span><span class="ph-arr">▾</span></div>
       <div class="pb g1">
-        <div><span class="lbl" data-k="shopName">Shop Name</span><input id="shopName" value="AURA Gold Shop" oninput="saveSettings();renderInvoice()" /></div>
-        <div class="g2">
-          <div><span class="lbl" data-k="vatNo">VAT No.</span><input id="shopVat" oninput="saveSettings();renderInvoice()" /></div>
-          <div><span class="lbl" data-k="phone">Phone</span><input id="shopPhone" type="tel" oninput="saveSettings();renderInvoice()" /></div>
+        <div id="shopLockBanner" class="lock-banner" style="display:none">
+          <div class="lock-banner-txt"><span class="lock-banner-ico">🔒</span><span>Shop info is locked. Only admin can edit.</span></div>
+          <button class="unlock-btn" onclick="unlockShop()">🔑 Unlock</button>
         </div>
-        <div><span class="lbl" data-k="address">Address</span><textarea id="shopAddr" rows="2" oninput="saveSettings();renderInvoice()"></textarea></div>
-        <div>
-          <span class="lbl" data-k="lSocial">Social Media</span>
-          <div class="g2">
-            <input id="shopInsta" placeholder="Instagram" oninput="saveSettings();renderInvoice()" />
-            <input id="shopTiktok" placeholder="TikTok" oninput="saveSettings();renderInvoice()" />
+        <div id="shopFields">
+          <div class="g1">
+            <div><span class="lbl" data-k="shopName">Shop Name</span><input id="shopName" value="AURA Gold Shop" oninput="saveSettings();renderInvoice()" /></div>
+            <div class="g2">
+              <div><span class="lbl" data-k="vatNo">VAT No.</span><input id="shopVat" oninput="saveSettings();renderInvoice()" /></div>
+              <div><span class="lbl" data-k="phone">Phone</span><input id="shopPhone" type="tel" oninput="saveSettings();renderInvoice()" /></div>
+            </div>
+            <div><span class="lbl" data-k="address">Address</span><textarea id="shopAddr" rows="2" oninput="saveSettings();renderInvoice()"></textarea></div>
+            <div>
+              <span class="lbl" data-k="lSocial">Social Media</span>
+              <div class="g2">
+                <input id="shopInsta" placeholder="Instagram" oninput="saveSettings();renderInvoice()" />
+                <input id="shopTiktok" placeholder="TikTok" oninput="saveSettings();renderInvoice()" />
+              </div>
+              <div style="height:10px"></div>
+              <input id="shopSnap" placeholder="Snapchat" oninput="saveSettings();renderInvoice()" />
+            </div>
+            <div>
+              <span class="lbl" data-k="shopLogo">Logo</span>
+              <input id="logoInput" type="file" accept="image/*" onchange="onLogo(this)" />
+              <button class="lt sm au" style="margin-top:6px" onclick="removeLogo()" data-k="removeLogo">Remove Logo</button>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:4px">
+              <button class="lock-btn" onclick="lockShop()">🔒 Lock Shop Info</button>
+            </div>
           </div>
-          <div style="height:10px"></div>
-          <input id="shopSnap" placeholder="Snapchat" oninput="saveSettings();renderInvoice()" />
-        </div>
-        <div>
-          <span class="lbl" data-k="shopLogo">Logo</span>
-          <input id="logoInput" type="file" accept="image/*" onchange="onLogo(this)" />
-          <button class="lt sm au" style="margin-top:6px" onclick="removeLogo()" data-k="removeLogo">Remove Logo</button>
         </div>
       </div>
     </div>
@@ -814,9 +839,58 @@
       renderItems();
       calc();
       renderHistory();
+      applyLockState();
     }catch(e){
       console.error("App init failed:",e);
       alert("App failed to load on this device. Please reopen the file in Chrome and allow internet access.");
+    }
+
+    // ══════════════════════════════════════════
+    // SHOP LOCK SYSTEM
+    // Change this password to your own secret:
+    const ADMIN_PASSWORD = "aura2024";
+    // ══════════════════════════════════════════
+
+    function isShopLocked(){
+      return getLS("au.shoplock") === "1";
+    }
+
+    function applyLockState(){
+      const locked = isShopLocked();
+      const banner = $("shopLockBanner");
+      const fields = $("shopFields");
+      if(locked){
+        banner.style.display = "flex";
+        fields.classList.add("locked-overlay");
+        // Disable all inputs inside shopFields
+        fields.querySelectorAll("input,select,textarea,button").forEach(el => {
+          el.setAttribute("disabled","disabled");
+        });
+      } else {
+        banner.style.display = "none";
+        fields.classList.remove("locked-overlay");
+        fields.querySelectorAll("input,select,textarea,button").forEach(el => {
+          el.removeAttribute("disabled");
+        });
+      }
+    }
+
+    function lockShop(){
+      saveLS("au.shoplock","1");
+      applyLockState();
+      toast("🔒 Shop info locked!");
+    }
+
+    function unlockShop(){
+      const pwd = prompt("Enter admin password to unlock shop info:");
+      if(pwd === null) return; // cancelled
+      if(pwd === ADMIN_PASSWORD){
+        saveLS("au.shoplock","0");
+        applyLockState();
+        toast("🔓 Shop info unlocked!");
+      } else {
+        alert("❌ Wrong password. Access denied.");
+      }
     }
   </script>
 </body>
