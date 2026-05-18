@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
   <meta name="theme-color" content="#0a0a0a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>AURA Gold ZATCA Pro</title>
   <style>
     :root{
@@ -14,21 +16,14 @@
     *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
     html,body{margin:0;padding:0}
     body{background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--ink);font-size:14px}
-    .topbar{
-      background:var(--dark);padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;
-      position:sticky;top:0;z-index:20;box-shadow:0 2px 16px rgba(0,0,0,.35)
-    }
+    .topbar{background:var(--dark);padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;position:sticky;top:0;z-index:20;box-shadow:0 2px 16px rgba(0,0,0,.35)}
     .brand{display:flex;align-items:center;gap:10px;min-width:0}
-    .logobox{
-      width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,#f5e6c0,#c9a84c,#7a5c1e);
-      display:grid;place-items:center;font-size:18px;font-weight:900;color:#111;background-size:cover;background-position:center;
-      overflow:hidden;flex-shrink:0
-    }
+    .logobox{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,#f5e6c0,#c9a84c,#7a5c1e);display:grid;place-items:center;font-size:18px;font-weight:900;color:#111;background-size:cover;background-position:center;overflow:hidden;flex-shrink:0}
     .btxt{min-width:0}
     .bname{color:#fff;font-size:15px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .bsub{color:var(--gold);font-size:10px;letter-spacing:1px;text-transform:uppercase}
     #langSel{background:#222;color:#fff;border:1px solid #444;border-radius:8px;padding:6px 8px;font-size:13px;min-height:36px;width:100px}
-    .app{max-width:520px;margin:0 auto;padding:10px 10px 80px}
+    .app{max-width:520px;margin:0 auto;padding:10px 10px 100px}
     .panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 4px 20px rgba(0,0,0,.07);margin-bottom:11px;overflow:hidden}
     .ph{background:linear-gradient(135deg,#0a0a0a,#251e0a);padding:12px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
     .ph-ttl{color:var(--gold);font-size:13px;font-weight:800;flex:1}
@@ -41,22 +36,13 @@
     .g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     .lbl{display:block;color:var(--muted);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.3px;margin-bottom:5px}
     input,select,textarea,button{font-family:inherit}
-    input,select,textarea{
-      width:100%;min-height:46px;border-radius:11px;border:1.5px solid var(--line);background:#fff;color:var(--ink);
-      padding:10px 12px;outline:none;font-size:15px
-    }
+    input,select,textarea{width:100%;min-height:46px;border-radius:11px;border:1.5px solid var(--line);background:#fff;color:var(--ink);padding:10px 12px;outline:none;font-size:15px}
     input:focus,select:focus,textarea:focus{border-color:var(--gold)}
     textarea{min-height:68px;resize:vertical}
     input[type=file]{min-height:40px;padding:8px}
-    .chk{
-      display:flex;align-items:center;gap:10px;min-height:46px;padding:10px 12px;border:1.5px solid var(--line);
-      border-radius:11px;background:#fff;font-size:13px;font-weight:700;cursor:pointer
-    }
+    .chk{display:flex;align-items:center;gap:10px;min-height:46px;padding:10px 12px;border:1.5px solid var(--line);border-radius:11px;background:#fff;font-size:13px;font-weight:700;cursor:pointer}
     .chk input{width:20px;height:20px;min-height:20px;accent-color:var(--gold)}
-    button{
-      border:0;border-radius:11px;padding:11px 14px;font-weight:800;cursor:pointer;color:#fff;background:var(--green);
-      font-size:13px;min-height:46px;display:inline-flex;align-items:center;justify-content:center;gap:6px;width:100%
-    }
+    button{border:0;border-radius:11px;padding:11px 14px;font-weight:800;cursor:pointer;color:#fff;background:var(--green);font-size:13px;min-height:46px;display:inline-flex;align-items:center;justify-content:center;gap:6px;width:100%}
     button.gold{background:linear-gradient(135deg,var(--gold),var(--gold4))}
     button.dk{background:#333}
     button.lt{background:#ece8de;color:var(--ink)}
@@ -74,24 +60,15 @@
     .trow.grand{background:linear-gradient(135deg,#0a0a0a,#251e0a);border:none;color:var(--gold3);font-size:17px}
     .trow.red{color:var(--red)}
     .trow.grn{color:var(--green)}
-    .nav{
-      position:fixed;bottom:0;left:0;right:0;z-index:50;background:rgba(10,10,10,.97);border-top:1px solid #2a2a2a;
-      padding:8px 12px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;backdrop-filter:blur(16px)
-    }
-    .nb{
-      background:transparent;border:1px solid #333;border-radius:11px;min-height:52px;color:#fff;font-size:11px;font-weight:700;
-      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer
-    }
+    .nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:rgba(10,10,10,.97);border-top:1px solid #2a2a2a;padding:8px 12px;padding-bottom:calc(8px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(4,1fr);gap:6px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+    .nb{background:transparent;border:1px solid #333;border-radius:11px;min-height:52px;color:#fff;font-size:11px;font-weight:700;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;-webkit-appearance:none;appearance:none}
     .nb.gold{background:linear-gradient(135deg,var(--gold),var(--gold4));border-color:transparent}
     .nb.blue{background:var(--blue);border-color:transparent}
     .ni{font-size:18px;line-height:1}
     .hitem{border:1px solid var(--line);border-radius:11px;padding:11px;background:#fff;margin-bottom:8px}
     .hidden{display:none !important}
     .err{display:none;background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:10px 12px;color:var(--red);font-size:13px;font-weight:700;margin-top:8px}
-    #toast{
-      position:fixed;bottom:82px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:var(--gold3);padding:10px 18px;
-      border-radius:11px;font-size:13px;font-weight:800;z-index:9999;border:1px solid var(--gold4);opacity:0;pointer-events:none;transition:opacity .3s
-    }
+    #toast{position:fixed;bottom:calc(82px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);background:#1a1a1a;color:var(--gold3);padding:10px 18px;border-radius:11px;font-size:13px;font-weight:800;z-index:9999;border:1px solid var(--gold4);opacity:0;pointer-events:none;transition:opacity .3s;white-space:nowrap}
     #invOut{background:#fff;width:100%;display:block;font-family:Georgia,serif;color:#1a1201;min-height:120px}
     .istrip{height:5px;background:linear-gradient(90deg,#7a5c1e,#c9a84c 30%,#f5e6c0 50%,#c9a84c 70%,#7a5c1e)}
     .ibody{padding:7mm 9mm}
@@ -104,18 +81,12 @@
     .issub{font-size:9px;color:#a07830;letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
     .isinfo{font-size:9px;color:#5a4a2a;margin-top:4px;line-height:1.9}
     .itblock{text-align:right}
-    .ibadge{
-      display:inline-block;background:linear-gradient(135deg,#0a0a0a,#251e0a);color:#f5e6c0;font-size:11px;font-weight:900;
-      padding:6px 12px;border-radius:7px;letter-spacing:.4px;border:1px solid #c9a84c;margin-bottom:5px
-    }
+    .ibadge{display:inline-block;background:linear-gradient(135deg,#0a0a0a,#251e0a);color:#f5e6c0;font-size:11px;font-weight:900;padding:6px 12px;border-radius:7px;letter-spacing:.4px;border:1px solid #c9a84c;margin-bottom:5px}
     .imeta{font-size:9px;color:#5a4a2a;line-height:2;text-align:right}
     .imeta strong{color:#1a1201}
     .idiv{display:flex;align-items:center;gap:3mm;margin:3mm 0}
     .idivl{flex:1;height:1px;background:linear-gradient(90deg,transparent,#c9a84c,transparent)}
-    .icbar{
-      background:linear-gradient(135deg,#faf6eb,#fdf8f0);border:1px solid #e5d8b0;border-radius:9px;padding:3mm 4mm;margin-bottom:4mm;
-      display:flex;flex-wrap:wrap;gap:3mm;justify-content:space-between
-    }
+    .icbar{background:linear-gradient(135deg,#faf6eb,#fdf8f0);border:1px solid #e5d8b0;border-radius:9px;padding:3mm 4mm;margin-bottom:4mm;display:flex;flex-wrap:wrap;gap:3mm;justify-content:space-between}
     .icf .icl{font-size:8px;color:#a07830;font-weight:800;text-transform:uppercase;letter-spacing:.5px}
     .icf .icv{font-size:11px;font-weight:800;color:#1a1201;margin-top:2px}
     .itable{width:100%;border-collapse:collapse;margin-bottom:4mm;table-layout:fixed;font-size:9px}
@@ -157,6 +128,7 @@
     .social-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:4px;font-size:8px;color:#8a6a20;font-weight:700}
     .soc{display:inline-flex;align-items:center;gap:4px}
     .soc-ico{display:inline-flex;align-items:center;justify-content:center;width:12px;height:12px;color:#111}
+    .disclaimer-bar{background:#faf5e8;border:1px solid #e5d8b0;border-radius:7px;padding:3mm 4mm;margin-top:3mm;font-size:8px;color:#5a4a2a;line-height:1.8;text-align:center}
     .inv-rtl{direction:rtl}
     .inv-rtl .ihdr{flex-direction:row-reverse}
     .inv-rtl .itblock{text-align:left}
@@ -177,6 +149,7 @@
     html[dir="rtl"] .g2,html[dir="rtl"] .ihead,html[dir="rtl"] .srow,html[dir="rtl"] .trow,html[dir="rtl"] .ph,html[dir="rtl"] .brand{direction:rtl}
     html[dir="rtl"] .chk{flex-direction:row-reverse}
     html[dir="rtl"] .nav{direction:rtl}
+    #printArea{display:none;position:static}
     @media print{
       html,body{background:#fff !important;margin:0 !important;padding:0 !important;-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
       .topbar,.app,.nav,#toast{display:none !important}
@@ -188,20 +161,13 @@
       .iqrb{margin-top:10px}
       .inotes{max-width:none;margin-bottom:10px}
     }
-
-    /* ── Shop Lock System ── */
-    .lock-banner{
-      background:linear-gradient(135deg,#0a0a0a,#251e0a);border:1.5px solid var(--gold);
-      border-radius:11px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;
-      margin-bottom:10px
-    }
+    #qrLibStatus{display:none;background:#fef9e7;border:1px solid #f0c040;border-radius:9px;padding:8px 12px;font-size:12px;color:#7a5c1e;font-weight:700;margin-bottom:8px;text-align:center}
+    .lock-banner{background:linear-gradient(135deg,#0a0a0a,#251e0a);border:1.5px solid var(--gold);border-radius:11px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
     .lock-banner-txt{color:var(--gold3);font-size:12px;font-weight:800;display:flex;align-items:center;gap:8px}
     .lock-banner-ico{font-size:18px}
     .locked-overlay{pointer-events:none;opacity:0.45;user-select:none}
-    .unlock-btn{background:linear-gradient(135deg,var(--gold),var(--gold4));color:#111;border:none;border-radius:9px;
-      padding:8px 14px;font-size:12px;font-weight:900;cursor:pointer;min-height:36px;width:auto;display:inline-flex;align-items:center;gap:5px}
-    .lock-btn{background:#333;color:var(--gold3);border:1px solid var(--gold4);border-radius:9px;
-      padding:8px 14px;font-size:12px;font-weight:900;cursor:pointer;min-height:36px;width:auto;display:inline-flex;align-items:center;gap:5px}
+    .unlock-btn{background:linear-gradient(135deg,var(--gold),var(--gold4));color:#111;border:none;border-radius:9px;padding:8px 14px;font-size:12px;font-weight:900;cursor:pointer;min-height:36px;width:auto;display:inline-flex;align-items:center;gap:5px;pointer-events:all}
+    .lock-btn{background:#333;color:var(--gold3);border:1px solid var(--gold4);border-radius:9px;padding:8px 14px;font-size:12px;font-weight:900;cursor:pointer;min-height:36px;width:auto;display:inline-flex;align-items:center;gap:5px}
   </style>
 </head>
 <body>
@@ -220,6 +186,8 @@
   </div>
 
   <div class="app">
+    <div id="qrLibStatus">⚠️ QR library loading... Please wait or check internet connection.</div>
+
     <div class="panel" id="pShop">
       <div class="ph" onclick="togglePanel('pShop')"><span class="ph-ttl" data-k="shop">Shop Info</span><span class="ph-arr">▾</span></div>
       <div class="pb g1">
@@ -235,6 +203,10 @@
               <div><span class="lbl" data-k="phone">Phone</span><input id="shopPhone" type="tel" oninput="saveSettings();renderInvoice()" /></div>
             </div>
             <div><span class="lbl" data-k="address">Address</span><textarea id="shopAddr" rows="2" oninput="saveSettings();renderInvoice()"></textarea></div>
+            <div class="g2">
+              <div><span class="lbl">CR No. / السجل التجاري</span><input id="shopCr" placeholder="CR No." oninput="saveSettings();renderInvoice()" /></div>
+              <div><span class="lbl">رخصة المعادن</span><input id="shopMetalLic" placeholder="رخصة المعادن" oninput="saveSettings();renderInvoice()" /></div>
+            </div>
             <div>
               <span class="lbl" data-k="lSocial">Social Media</span>
               <div class="g2">
@@ -243,6 +215,10 @@
               </div>
               <div style="height:10px"></div>
               <input id="shopSnap" placeholder="Snapchat" oninput="saveSettings();renderInvoice()" />
+            </div>
+            <div>
+              <span class="lbl">تنبيه / Disclaimer</span>
+              <textarea id="shopDisclaimer" rows="3" oninput="saveSettings();renderInvoice()">وزن الحجر لا يتجاوز %5 من وزنه والبضاعه المباعه لا ترد ولاتستبدل بعد خروجها من المحل الا بقصد البيع</textarea>
             </div>
             <div>
               <span class="lbl" data-k="shopLogo">Logo</span>
@@ -343,96 +319,143 @@
     </div>
   </div>
 
-  <div id="printArea" class="hidden"></div>
+  <div id="printArea" style="display:none"></div>
   <div class="nav">
     <button class="nb gold" onclick="addItem()"><span class="ni">＋</span><span data-k="lAddItem">Add</span></button>
     <button class="nb" onclick="saveInvoice()"><span class="ni">💾</span><span data-k="lSave">Save</span></button>
-    <button class="nb" onclick="if(confirm(TL.confirmNew)) newInvoice()"><span class="ni">🆕</span><span data-k="lNew">New</span></button>
+    <button class="nb" onclick="confirmNewInvoice()"><span class="ni">🆕</span><span data-k="lNew">New</span></button>
     <button class="nb blue" onclick="doPrint()"><span class="ni">🖨️</span><span data-k="lPrint">Print</span></button>
   </div>
-
   <div id="toast"></div>
   <input id="importFile" type="file" accept="application/json" class="hidden" onchange="onImport(this)" />
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script>
-    const T = {
-      en: {
-        appTitle:"AURA Gold Shop", appSub:"Simplified Tax Invoice",
-        shop:"Shop Info", shopName:"Shop Name", vatNo:"VAT No.", phone:"Phone", address:"Address",
-        shopLogo:"Logo", removeLogo:"Remove Logo", lSocial:"Social Media",
-        custInv:"Customer & Invoice", lInvNo:"Invoice No.", lDate:"Date", lCustName:"Customer", lCustPhone:"Phone",
-        lVatRate:"VAT %", lPaid:"Paid (SAR)", lPayType:"Payment", lExp:"Expense (SAR)", lNotes:"Notes",
-        lShowQr:"Show QR on Invoice", lItems:"Gold Items", lAddItem:"Add Item", lDup:"Duplicate",
-        lTotals:"Totals", lSub:"Subtotal", lTax:"Taxable Amount", lVatAmt:"VAT Amount", lGrand:"GRAND TOTAL",
-        lPaidLbl:"Paid", lBal:"Balance Due", lPreview:"Invoice Preview", lHistory:"Invoice History",
-        lTools:"Tools", lImport:"Import", lNewNo:"New No.", lExport:"Export Backup (JSON)", lSave:"Save",
-        lNew:"New", lPrint:"Print", confirmNew:"Start a new invoice?", confirmDel:"Delete this invoice?",
-        saved:"Invoice Saved!", imported:"Imported!", amountWords:"Amount in Words",
-        lItemType:"Item Type", lKarat:"Karat", lUnit:"Unit", lQty:"Qty", lWeight:"Weight (g)", lRateG:"Rate/g",
-        lMaking:"Making", lDiscount:"Discount", lApplyVat:"Apply VAT", lTotalWt:"Total Wt", lPreVat:"Pre-VAT",
-        lVatLbl:"VAT", lItemTotal:"Item Total", lCopy:"Copy", lDel:"Delete", lNoSaved:"No saved invoices", lLoad:"Load",
-        Ring:"Ring", Bracelet:"Bracelet", Chain:"Chain", Necklace:"Necklace", Earrings:"Earrings", Pendant:"Pendant", Bullion:"Bullion", Other:"Other",
+  (function(){
+    var QR_LOADING=false;
+    function loadQRLib(cb){
+      if(typeof QRCode!=="undefined"){ cb&&cb(); return; }
+      if(QR_LOADING){ setTimeout(function(){ loadQRLib(cb); },300); return; }
+      QR_LOADING=true;
+      var s=document.createElement("script");
+      s.src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js";
+      s.onload=function(){ QR_LOADING=false; document.getElementById("qrLibStatus").style.display="none"; cb&&cb(); };
+      s.onerror=function(){ QR_LOADING=false; var st=document.getElementById("qrLibStatus"); st.style.display="block"; st.textContent="⚠️ QR library failed to load. Check internet and reload."; };
+      document.head.appendChild(s);
+    }
+    loadQRLib(function(){ if(typeof renderInvoice==="function") renderInvoice(); });
+  })();
+  </script>
+
+  <script>
+    const T={
+      en:{
+        appTitle:"AURA Gold Shop",appSub:"Simplified Tax Invoice",
+        shop:"Shop Info",shopName:"Shop Name",vatNo:"VAT No.",phone:"Phone",address:"Address",
+        shopLogo:"Logo",removeLogo:"Remove Logo",lSocial:"Social Media",
+        custInv:"Customer & Invoice",lInvNo:"Invoice No.",lDate:"Date",lCustName:"Customer",lCustPhone:"Phone",
+        lVatRate:"VAT %",lPaid:"Paid (SAR)",lPayType:"Payment",lExp:"Expense (SAR)",lNotes:"Notes",
+        lShowQr:"Show QR on Invoice",lItems:"Gold Items",lAddItem:"Add Item",lDup:"Duplicate",
+        lTotals:"Totals",lSub:"Subtotal",lTax:"Taxable Amount",lVatAmt:"VAT Amount",lGrand:"GRAND TOTAL",
+        lPaidLbl:"Paid",lBal:"Balance Due",lPreview:"Invoice Preview",lHistory:"Invoice History",
+        lTools:"Tools",lImport:"Import",lNewNo:"New No.",lExport:"Export Backup (JSON)",lSave:"Save",
+        lNew:"New",lPrint:"Print",confirmNew:"Start a new invoice?",confirmDel:"Delete this invoice?",
+        saved:"Invoice Saved!",imported:"Imported!",amountWords:"Amount in Words",
+        lItemType:"Item Type",lKarat:"Karat",lUnit:"Unit",lQty:"Qty",lWeight:"Weight (g)",lRateG:"Rate/g",
+        lMaking:"Making",lDiscount:"Discount",lApplyVat:"Apply VAT",lTotalWt:"Total Wt",lPreVat:"Pre-VAT",
+        lVatLbl:"VAT",lItemTotal:"Item Total",lCopy:"Copy",lDel:"Delete",lNoSaved:"No saved invoices",lLoad:"Load",
+        Ring:"Ring",Bracelet:"Bracelet",Chain:"Chain",Necklace:"Necklace",Earrings:"Earrings",Pendant:"Pendant",Bullion:"Bullion",Other:"Other",
         "24K":"24K","22K":"22K","21K":"21K","18K":"18K","14K":"14K",
-        Gram:"Gram", Piece:"Piece", Carat:"Carat", Cash:"Cash", Card:"Card", Transfer:"Bank Transfer", Mixed:"Mixed", Credit:"Credit",
-        iShop:"Gold Jewellery", iSale:"Simplified Tax Invoice", iInv:"Invoice", iDate:"Date", iPay:"Payment",
-        iCust:"Customer", iPhoneLbl:"Phone", iVatR:"VAT Rate", iVatN:"VAT No.", iItem:"Item", iWt:"Wt (g)", iRate:"Rate",
-        iPreV:"Pre-VAT", iVat:"VAT", iTotal:"Total", iDisc:"Discount", iNet:"Net Amount", iVatOnly:"VAT Amount",
-        iGrandWithVat:"Total Including VAT", iPaid:"Paid", iBal:"Balance Due", iExp:"Expense", iThanks:"Thank you for your business.", iSig:"Authorized Signature"
+        Gram:"Gram",Piece:"Piece",Carat:"Carat",Cash:"Cash",Card:"Card",Transfer:"Bank Transfer",Mixed:"Mixed",Credit:"Credit",
+        iShop:"Gold Jewellery",iSale:"Simplified Tax Invoice",iInv:"Invoice",iDate:"Date",iPay:"Payment",
+        iCust:"Customer",iPhoneLbl:"Phone",iVatR:"VAT Rate",iVatN:"VAT No.",iItem:"Item",iWt:"Wt (g)",iRate:"Rate",
+        iPreV:"Pre-VAT",iVat:"VAT",iTotal:"Total",iDisc:"Discount",iNet:"Net Amount",iVatOnly:"VAT Amount",
+        iGrandWithVat:"Total Including VAT",iPaid:"Paid",iBal:"Balance Due",iExp:"Expense",iThanks:"Thank you for your business.",iSig:"Authorized Signature"
       },
-      ar: {
-        appTitle:"متجر الذهب", appSub:"فاتورة ضريبية مبسطة",
-        shop:"معلومات المتجر", shopName:"اسم المتجر", vatNo:"الرقم الضريبي", phone:"الهاتف", address:"العنوان",
-        shopLogo:"الشعار", removeLogo:"حذف الشعار", lSocial:"وسائل التواصل",
-        custInv:"العميل والفاتورة", lInvNo:"رقم الفاتورة", lDate:"التاريخ", lCustName:"العميل", lCustPhone:"الهاتف",
-        lVatRate:"نسبة الضريبة", lPaid:"المدفوع (ريال)", lPayType:"الدفع", lExp:"المصروف (ريال)", lNotes:"ملاحظات",
-        lShowQr:"إظهار QR في الفاتورة", lItems:"أصناف الذهب", lAddItem:"إضافة صنف", lDup:"نسخ",
-        lTotals:"الإجماليات", lSub:"الإجمالي الفرعي", lTax:"القيمة الخاضعة للضريبة", lVatAmt:"قيمة الضريبة", lGrand:"الإجمالي الكلي",
-        lPaidLbl:"المدفوع", lBal:"المتبقي", lPreview:"معاينة الفاتورة", lHistory:"سجل الفواتير",
-        lTools:"الأدوات", lImport:"استيراد", lNewNo:"رقم جديد", lExport:"تصدير نسخة احتياطية (JSON)", lSave:"حفظ",
-        lNew:"جديد", lPrint:"طباعة", confirmNew:"بدء فاتورة جديدة؟", confirmDel:"حذف هذه الفاتورة؟",
-        saved:"تم حفظ الفاتورة!", imported:"تم الاستيراد!", amountWords:"المبلغ كتابة",
-        lItemType:"نوع الصنف", lKarat:"العيار", lUnit:"الوحدة", lQty:"الكمية", lWeight:"الوزن (جم)", lRateG:"سعر/جم",
-        lMaking:"المصنعية", lDiscount:"الخصم", lApplyVat:"تطبيق الضريبة", lTotalWt:"إجمالي الوزن", lPreVat:"قبل الضريبة",
-        lVatLbl:"الضريبة", lItemTotal:"إجمالي الصنف", lCopy:"نسخ", lDel:"حذف", lNoSaved:"لا توجد فواتير محفوظة", lLoad:"تحميل",
-        Ring:"خاتم", Bracelet:"سوار", Chain:"سلسلة", Necklace:"عقد", Earrings:"أقراط", Pendant:"تعليقة", Bullion:"سبيكة", Other:"أخرى",
+      ar:{
+        appTitle:"متجر الذهب",appSub:"فاتورة ضريبية مبسطة",
+        shop:"معلومات المتجر",shopName:"اسم المتجر",vatNo:"الرقم الضريبي",phone:"الهاتف",address:"العنوان",
+        shopLogo:"الشعار",removeLogo:"حذف الشعار",lSocial:"وسائل التواصل",
+        custInv:"العميل والفاتورة",lInvNo:"رقم الفاتورة",lDate:"التاريخ",lCustName:"العميل",lCustPhone:"الهاتف",
+        lVatRate:"نسبة الضريبة",lPaid:"المدفوع (ريال)",lPayType:"الدفع",lExp:"المصروف (ريال)",lNotes:"ملاحظات",
+        lShowQr:"إظهار QR في الفاتورة",lItems:"أصناف الذهب",lAddItem:"إضافة صنف",lDup:"نسخ",
+        lTotals:"الإجماليات",lSub:"الإجمالي الفرعي",lTax:"القيمة الخاضعة للضريبة",lVatAmt:"قيمة الضريبة",lGrand:"الإجمالي الكلي",
+        lPaidLbl:"المدفوع",lBal:"المتبقي",lPreview:"معاينة الفاتورة",lHistory:"سجل الفواتير",
+        lTools:"الأدوات",lImport:"استيراد",lNewNo:"رقم جديد",lExport:"تصدير نسخة احتياطية (JSON)",lSave:"حفظ",
+        lNew:"جديد",lPrint:"طباعة",confirmNew:"بدء فاتورة جديدة؟",confirmDel:"حذف هذه الفاتورة؟",
+        saved:"تم حفظ الفاتورة!",imported:"تم الاستيراد!",amountWords:"المبلغ كتابة",
+        lItemType:"نوع الصنف",lKarat:"العيار",lUnit:"الوحدة",lQty:"الكمية",lWeight:"الوزن (جم)",lRateG:"سعر/جم",
+        lMaking:"المصنعية",lDiscount:"الخصم",lApplyVat:"تطبيق الضريبة",lTotalWt:"إجمالي الوزن",lPreVat:"قبل الضريبة",
+        lVatLbl:"الضريبة",lItemTotal:"إجمالي الصنف",lCopy:"نسخ",lDel:"حذف",lNoSaved:"لا توجد فواتير محفوظة",lLoad:"تحميل",
+        Ring:"خاتم",Bracelet:"سوار",Chain:"سلسلة",Necklace:"عقد",Earrings:"أقراط",Pendant:"تعليقة",Bullion:"سبيكة",Other:"أخرى",
         "24K":"24 عيار","22K":"22 عيار","21K":"21 عيار","18K":"18 عيار","14K":"14 عيار",
-        Gram:"جرام", Piece:"قطعة", Carat:"قيراط", Cash:"نقداً", Card:"بطاقة", Transfer:"تحويل بنكي", Mixed:"مختلط", Credit:"آجل",
-        iShop:"مجوهرات ذهبية", iSale:"فاتورة ضريبية مبسطة", iInv:"الفاتورة", iDate:"التاريخ", iPay:"الدفع",
-        iCust:"العميل", iPhoneLbl:"الهاتف", iVatR:"نسبة الضريبة", iVatN:"الرقم الضريبي", iItem:"الصنف", iWt:"الوزن", iRate:"السعر",
-        iPreV:"قبل الضريبة", iVat:"الضريبة", iTotal:"الإجمالي", iDisc:"الخصم", iNet:"الصافي", iVatOnly:"ضريبة القيمة المضافة",
-        iGrandWithVat:"المجموع شامل ضريبة القيمة المضافة", iPaid:"المدفوع", iBal:"المتبقي", iExp:"المصروف", iThanks:"شكراً لتعاملكم معنا.", iSig:"توقيع المفوض"
+        Gram:"جرام",Piece:"قطعة",Carat:"قيراط",Cash:"نقداً",Card:"بطاقة",Transfer:"تحويل بنكي",Mixed:"مختلط",Credit:"آجل",
+        iShop:"مجوهرات ذهبية",iSale:"فاتورة ضريبية مبسطة",iInv:"الفاتورة",iDate:"التاريخ",iPay:"الدفع",
+        iCust:"العميل",iPhoneLbl:"الهاتف",iVatR:"نسبة الضريبة",iVatN:"الرقم الضريبي",iItem:"الصنف",iWt:"الوزن",iRate:"السعر",
+        iPreV:"قبل الضريبة",iVat:"الضريبة",iTotal:"الإجمالي",iDisc:"الخصم",iNet:"الصافي",iVatOnly:"ضريبة القيمة المضافة",
+        iGrandWithVat:"المجموع شامل ضريبة القيمة المضافة",iPaid:"المدفوع",iBal:"المتبقي",iExp:"المصروف",iThanks:"شكراً لتعاملكم معنا.",iSig:"توقيع المفوض"
       }
     };
 
-    let L = "en", TL = T.en, items = [];
-    const TYPES = ["Ring","Bracelet","Chain","Necklace","Earrings","Pendant","Bullion","Other"];
-    const KT = ["24K","22K","21K","18K","14K","Other"];
-    const UN = ["Gram","Piece","Carat"];
-    const $ = id => document.getElementById(id);
-    const t = k => (T[L] && T[L][k] !== undefined) ? T[L][k] : (T.en[k] ?? k);
-    const nVal = v => { const n = parseFloat(v); return Number.isFinite(n) ? n : 0; };
-    const money = n => Number(n || 0).toLocaleString("en", {minimumFractionDigits:2, maximumFractionDigits:2});
-    const num3 = n => Number(n || 0).toLocaleString("en", {minimumFractionDigits:3, maximumFractionDigits:3});
-    const enc = txt => new TextEncoder().encode(String(txt ?? ""));
+    let L="en",TL=T.en,items=[];
+    const TYPES=["Ring","Bracelet","Chain","Necklace","Earrings","Pendant","Bullion","Other"];
+    const KT=["24K","22K","21K","18K","14K","Other"];
+    const UN=["Gram","Piece","Carat"];
+    const $=id=>document.getElementById(id);
+    const t=k=>(T[L]&&T[L][k]!==undefined)?T[L][k]:(T.en[k]??k);
+    const nVal=v=>{const n=parseFloat(v);return Number.isFinite(n)?n:0;};
+    const money=n=>Number(n||0).toLocaleString("en",{minimumFractionDigits:2,maximumFractionDigits:2});
+    const num3=n=>Number(n||0).toLocaleString("en",{minimumFractionDigits:3,maximumFractionDigits:3});
+    const enc=txt=>new TextEncoder().encode(String(txt??""));
 
-    function toast(msg){ const el=$("toast"); el.textContent=msg; el.style.opacity=1; clearTimeout(el._t); el._t=setTimeout(()=>el.style.opacity=0,1800); }
-    function saveLS(k,v){ localStorage.setItem(k,v); }
-    function getLS(k){ return localStorage.getItem(k); }
-    function getInvoices(){ try{ const x=JSON.parse(getLS("au.inv")||"[]"); return Array.isArray(x)?x:[]; }catch(e){ return []; } }
-    function setInvoices(x){ saveLS("au.inv", JSON.stringify(x)); }
-    function nextInvoiceNo(){ const y=String(new Date().getFullYear()).slice(-2); let c=parseInt(getLS("au.cnt")||"1",10); if(!Number.isFinite(c)||c<1)c=1; return `SINV-${y}-${String(c).padStart(4,"0")}`; }
-    function useInvoiceNo(){ const no=nextInvoiceNo(); let c=parseInt(getLS("au.cnt")||"1",10); if(!Number.isFinite(c)||c<1)c=1; saveLS("au.cnt",String(c+1)); return no; }
-    function nowLocal(){ const d=new Date(); const p=n=>String(n).padStart(2,"0"); return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`; }
-    function newInvoiceNo(){ $("invNo").value=useInvoiceNo(); $("invDate").value=nowLocal(); renderInvoice(); }
-    function togglePanel(id){ const p=$(id); if(!p)return; p.classList.toggle("closed"); saveLS("au.panel."+id, p.classList.contains("closed")?"1":"0"); }
-    function restorePanels(){ ["pShop","pCust","pItems","pTotals","pHist","pTools"].forEach(id=>{ if(getLS("au.panel."+id)==="1") $(id).classList.add("closed"); }); }
+    function toast(msg){const el=$("toast");el.textContent=msg;el.style.opacity=1;clearTimeout(el._t);el._t=setTimeout(()=>el.style.opacity=0,1800);}
+    function saveLS(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+    function getLS(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+    function getInvoices(){try{const x=JSON.parse(getLS("au.inv")||"[]");return Array.isArray(x)?x:[];}catch(e){return[];}}
+    function setInvoices(x){saveLS("au.inv",JSON.stringify(x));}
+    function nextInvoiceNo(){const y=String(new Date().getFullYear()).slice(-2);let c=parseInt(getLS("au.cnt")||"1",10);if(!Number.isFinite(c)||c<1)c=1;return `SINV-${y}-${String(c).padStart(4,"0")}`;}
+    function useInvoiceNo(){const no=nextInvoiceNo();let c=parseInt(getLS("au.cnt")||"1",10);if(!Number.isFinite(c)||c<1)c=1;saveLS("au.cnt",String(c+1));return no;}
+    function nowLocal(){const d=new Date();const p=n=>String(n).padStart(2,"0");return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`;}
+    function newInvoiceNo(){$("invNo").value=useInvoiceNo();$("invDate").value=nowLocal();renderInvoice();}
+    function togglePanel(id){const p=$(id);if(!p)return;p.classList.toggle("closed");saveLS("au.panel."+id,p.classList.contains("closed")?"1":"0");}
+    function restorePanels(){["pShop","pCust","pItems","pTotals","pHist","pTools"].forEach(id=>{if(getLS("au.panel."+id)==="1")$(id).classList.add("closed");});}
+    function safeConfirm(msg){try{return window.confirm(msg);}catch(e){return true;}}
+    function confirmNewInvoice(){if(safeConfirm(TL.confirmNew))newInvoice();}
 
-    function mkItem(d={}){ return { tp:d.tp||"Ring", kt:d.kt||"22K", un:d.un||"Gram", qty:nVal(d.qty||1), wt:nVal(d.wt||0), rate:nVal(d.rate||0), mkg:nVal(d.mkg||0), disc:nVal(d.disc||0), vat:d.vat!==false }; }
-    function itemMath(it,vr){ const totalWt=Math.max(0,nVal(it.qty)*nVal(it.wt)); const preVat=Math.max(0,totalWt*nVal(it.rate)+nVal(it.mkg)-nVal(it.disc)); const vatAmt=it.vat?preVat*vr:0; const total=preVat+vatAmt; return {totalWt,preVat,vatAmt,total}; }
+    // ══ SHOP LOCK SYSTEM ══
+    // Change this to your own secret password:
+    const ADMIN_PASSWORD="aura2024";
+
+    function isShopLocked(){return getLS("au.shoplock")==="1";}
+
+    function applyLockState(){
+      const locked=isShopLocked();
+      const banner=$("shopLockBanner");
+      const fields=$("shopFields");
+      if(locked){
+        banner.style.display="flex";
+        fields.classList.add("locked-overlay");
+        fields.querySelectorAll("input,select,textarea,button").forEach(el=>el.setAttribute("disabled","disabled"));
+      }else{
+        banner.style.display="none";
+        fields.classList.remove("locked-overlay");
+        fields.querySelectorAll("input,select,textarea,button").forEach(el=>el.removeAttribute("disabled"));
+      }
+    }
+
+    function lockShop(){saveLS("au.shoplock","1");applyLockState();toast("🔒 Shop info locked!");}
+
+    function unlockShop(){
+      const pwd=prompt("Enter admin password:");
+      if(pwd===null)return;
+      if(pwd===ADMIN_PASSWORD){saveLS("au.shoplock","0");applyLockState();toast("🔓 Unlocked!");}
+      else alert("❌ Wrong password.");
+    }
+
+    function mkItem(d={}){return{tp:d.tp||"Ring",kt:d.kt||"22K",un:d.un||"Gram",qty:nVal(d.qty||1),wt:nVal(d.wt||0),rate:nVal(d.rate||0),mkg:nVal(d.mkg||0),disc:nVal(d.disc||0),vat:d.vat!==false};}
+    function itemMath(it,vr){const totalWt=Math.max(0,nVal(it.qty)*nVal(it.wt));const preVat=Math.max(0,totalWt*nVal(it.rate)+nVal(it.mkg)-nVal(it.disc));const vatAmt=it.vat?preVat*vr:0;const total=preVat+vatAmt;return{totalWt,preVat,vatAmt,total};}
 
     function renderItems(){
-      const host=$("itemsHost"); host.innerHTML=""; $("itemCnt").textContent=items.length; const vr=nVal($("vatRate").value)/100;
+      const host=$("itemsHost");host.innerHTML="";$("itemCnt").textContent=items.length;const vr=nVal($("vatRate").value)/100;
       items.forEach((it,i)=>{
         const m=itemMath(it,vr);
         const el=document.createElement("div");
@@ -467,38 +490,37 @@
             <div class="srow n"><span>${t("lPreVat")}</span><strong>SAR ${money(m.preVat)}</strong></div>
             <div class="srow n"><span>${t("lVatLbl")}</span><strong>SAR ${money(m.vatAmt)}</strong></div>
             <div class="srow t"><span>${t("lItemTotal")}</span><strong>SAR ${money(m.total)}</strong></div>
-          </div>
-        `;
+          </div>`;
         host.appendChild(el);
-        el.querySelector("[data-dl]").onclick=()=>{ items.splice(i,1); if(!items.length) items=[mkItem()]; renderItems(); calc(); };
-        el.querySelector("[data-cp]").onclick=()=>{ items.push(mkItem({...items[i]})); renderItems(); calc(); };
+        el.querySelector("[data-dl]").onclick=()=>{items.splice(i,1);if(!items.length)items=[mkItem()];renderItems();calc();};
+        el.querySelector("[data-cp]").onclick=()=>{items.push(mkItem({...items[i]}));renderItems();calc();};
         el.querySelectorAll("[data-f]").forEach(inp=>{
-          const f=inp.dataset.f, isNum=["qty","wt","rate","mkg","disc"].includes(f);
-          const update=()=>{ items[i][f]=inp.type==="checkbox"?inp.checked:(isNum?nVal(inp.value):inp.value); calc(); };
+          const f=inp.dataset.f,isNum=["qty","wt","rate","mkg","disc"].includes(f);
+          const update=()=>{items[i][f]=inp.type==="checkbox"?inp.checked:(isNum?nVal(inp.value):inp.value);calc();};
           inp.addEventListener(inp.tagName==="SELECT"||inp.type==="checkbox"?"change":"input",update);
-          if(isNum) inp.addEventListener("blur",update);
+          if(isNum)inp.addEventListener("blur",update);
         });
       });
     }
 
-    function addItem(){ items.push(mkItem()); renderItems(); calc(); setTimeout(()=>$("pItems").scrollIntoView({behavior:"smooth",block:"end"}),120); }
-    function duplicateLastItem(){ if(!items.length)return; items.push(mkItem({...items[items.length-1]})); renderItems(); calc(); }
+    function addItem(){items.push(mkItem());renderItems();calc();setTimeout(()=>$("pItems").scrollIntoView({behavior:"smooth",block:"end"}),120);}
+    function duplicateLastItem(){if(!items.length)return;items.push(mkItem({...items[items.length-1]}));renderItems();calc();}
 
     function calc(){
       const vr=nVal($("vatRate").value)/100;
       let sub=0,tax=0,vat=0,discTotal=0;
-      items.forEach(it=>{ const m=itemMath(it,vr); sub+=m.preVat; discTotal+=nVal(it.disc); if(it.vat) tax+=m.preVat; vat+=m.vatAmt; });
-      const exp=nVal($("expAmt").value), grand=sub+vat+exp, paid=nVal($("paidAmt").value), bal=grand-paid;
-      $("dSub").textContent=`SAR ${money(sub)}`; $("dTax").textContent=`SAR ${money(tax)}`; $("dVat").textContent=`SAR ${money(vat)}`;
-      $("dGrand").textContent=`SAR ${money(grand)}`; $("dPaid").textContent=`SAR ${money(paid)}`; $("dBal").textContent=`SAR ${money(bal)}`;
+      items.forEach(it=>{const m=itemMath(it,vr);sub+=m.preVat;discTotal+=nVal(it.disc);if(it.vat)tax+=m.preVat;vat+=m.vatAmt;});
+      const exp=nVal($("expAmt").value),grand=sub+vat+exp,paid=nVal($("paidAmt").value),bal=grand-paid;
+      $("dSub").textContent=`SAR ${money(sub)}`;$("dTax").textContent=`SAR ${money(tax)}`;$("dVat").textContent=`SAR ${money(vat)}`;
+      $("dGrand").textContent=`SAR ${money(grand)}`;$("dPaid").textContent=`SAR ${money(paid)}`;$("dBal").textContent=`SAR ${money(bal)}`;
       renderInvoice();
     }
 
     function socialIcon(name){
       const common='width="12" height="12" viewBox="0 0 24 24" fill="currentColor"';
-      if(name==='instagram') return `<svg ${common}><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zM18 6.3a1.2 1.2 0 1 1-1.2 1.2A1.2 1.2 0 0 1 18 6.3z"/></svg>`;
-      if(name==='tiktok') return `<svg ${common}><path d="M16.5 2h2.7a5.8 5.8 0 0 0 2.8 3.1v2.8a8.5 8.5 0 0 1-3.3-.8v6.4a6.5 6.5 0 1 1-6.5-6.5c.3 0 .6 0 .9.1v2.8a3.7 3.7 0 1 0 2.8 3.6V2z"/></svg>`;
-      if(name==='snapchat') return `<svg ${common}><path d="M12 2c2.7 0 4.8 2.2 4.8 4.9 0 .7-.1 1.4-.4 2 .5.8 1.2 1.4 2.1 1.7.4.1.7.5.7.9s-.3.8-.7.9c-.6.2-1.2.3-1.8.4-.1.5-.2 1 .3 1.4.2.2.3.4.3.7 0 .5-.4 1-.9 1-.9 0-1.7-.3-2.4-.8-.6.3-1.3.5-2 .5s-1.4-.2-2-.5c-.7.5-1.5.8-2.4.8-.5 0-.9-.5-.9-1 0-.3.1-.5.3-.7.5-.4.4-.9.3-1.4-.6-.1-1.2-.2-1.8-.4-.4-.1-.7-.5-.7-.9s.3-.8.7-.9c.9-.3 1.6-.9 2.1-1.7-.3-.6-.4-1.3-.4-2C7.2 4.2 9.3 2 12 2z"/></svg>`;
+      if(name==='instagram')return `<svg ${common}><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zM18 6.3a1.2 1.2 0 1 1-1.2 1.2A1.2 1.2 0 0 1 18 6.3z"/></svg>`;
+      if(name==='tiktok')return `<svg ${common}><path d="M16.5 2h2.7a5.8 5.8 0 0 0 2.8 3.1v2.8a8.5 8.5 0 0 1-3.3-.8v6.4a6.5 6.5 0 1 1-6.5-6.5c.3 0 .6 0 .9.1v2.8a3.7 3.7 0 1 0 2.8 3.6V2z"/></svg>`;
+      if(name==='snapchat')return `<svg ${common}><path d="M12 2c2.7 0 4.8 2.2 4.8 4.9 0 .7-.1 1.4-.4 2 .5.8 1.2 1.4 2.1 1.7.4.1.7.5.7.9s-.3.8-.7.9c-.6.2-1.2.3-1.8.4-.1.5-.2 1 .3 1.4.2.2.3.4.3.7 0 .5-.4 1-.9 1-.9 0-1.7-.3-2.4-.8-.6.3-1.3.5-2 .5s-1.4-.2-2-.5c-.7.5-1.5.8-2.4.8-.5 0-.9-.5-.9-1 0-.3.1-.5.3-.7.5-.4.4-.9.3-1.4-.6-.1-1.2-.2-1.8-.4-.4-.1-.7-.5-.7-.9s.3-.8.7-.9c.9-.3 1.6-.9 2.1-1.7-.3-.6-.4-1.3-.4-2C7.2 4.2 9.3 2 12 2z"/></svg>`;
       return '';
     }
 
@@ -506,99 +528,118 @@
       num=Math.round((Number(num)||0)*100)/100;
       const ones=["Zero","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"];
       const tens=["","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"];
-      function below1000(n){ let str=""; if(n>=100){ str+=ones[Math.floor(n/100)]+" Hundred "; n%=100; } if(n>=20){ str+=tens[Math.floor(n/10)]+" "; n%=10; } if(n>0) str+=ones[n]+" "; return str.trim(); }
-      function wholeToWords(n){ if(n===0) return "Zero"; let parts=[]; if(n>=1000000){ parts.push(below1000(Math.floor(n/1000000))+" Million"); n%=1000000; } if(n>=1000){ parts.push(below1000(Math.floor(n/1000))+" Thousand"); n%=1000; } if(n>0) parts.push(below1000(n)); return parts.join(" ").trim(); }
-      const whole=Math.floor(num), frac=Math.round((num-whole)*100); let out=wholeToWords(whole)+" Saudi Riyals"; if(frac>0) out+=" and "+wholeToWords(frac)+" Halalas"; return out+" Only";
+      function below1000(n){let str="";if(n>=100){str+=ones[Math.floor(n/100)]+" Hundred ";n%=100;}if(n>=20){str+=tens[Math.floor(n/10)]+" ";n%=10;}if(n>0)str+=ones[n]+" ";return str.trim();}
+      function w2w(n){if(n===0)return"Zero";let p=[];if(n>=1000000){p.push(below1000(Math.floor(n/1000000))+" Million");n%=1000000;}if(n>=1000){p.push(below1000(Math.floor(n/1000))+" Thousand");n%=1000;}if(n>0)p.push(below1000(n));return p.join(" ").trim();}
+      const whole=Math.floor(num),frac=Math.round((num-whole)*100);let out=w2w(whole)+" Saudi Riyals";if(frac>0)out+=" and "+w2w(frac)+" Halalas";return out+" Only";
     }
+
     function numberToWordsAr(num){
       num=Math.round((Number(num)||0)*100)/100;
       const ones=["","واحد","اثنان","ثلاثة","أربعة","خمسة","ستة","سبعة","ثمانية","تسعة"];
       const teens=["عشرة","أحد عشر","اثنا عشر","ثلاثة عشر","أربعة عشر","خمسة عشر","ستة عشر","سبعة عشر","ثمانية عشر","تسعة عشر"];
       const tens=["","","عشرون","ثلاثون","أربعون","خمسون","ستون","سبعون","ثمانون","تسعون"];
       const hundreds=["","مائة","مائتان","ثلاثمائة","أربعمائة","خمسمائة","ستمائة","سبعمائة","ثمانمائة","تسعمائة"];
-      function below100(n){ if(n===0) return "صفر"; if(n<10) return ones[n]; if(n===10) return "عشرة"; if(n>10&&n<20) return teens[n-10]; if(n%10===0) return tens[Math.floor(n/10)]; return ones[n%10]+" و "+tens[Math.floor(n/10)]; }
-      function below1000(n){ if(n<100) return below100(n); if(n%100===0) return hundreds[Math.floor(n/100)]; return hundreds[Math.floor(n/100)]+" و "+below100(n%100); }
-      function wholeToWords(n){ if(n===0) return "صفر"; let parts=[]; if(n>=1000000){ const m=Math.floor(n/1000000); if(m===1) parts.push("مليون"); else if(m===2) parts.push("مليونان"); else if(m<=10) parts.push(below1000(m)+" ملايين"); else parts.push(below1000(m)+" مليون"); n%=1000000; } if(n>=1000){ const th=Math.floor(n/1000); if(th===1) parts.push("ألف"); else if(th===2) parts.push("ألفان"); else if(th<=10) parts.push(below1000(th)+" آلاف"); else parts.push(below1000(th)+" ألف"); n%=1000; } if(n>0) parts.push(below1000(n)); return parts.join(" و "); }
-      const whole=Math.floor(num), frac=Math.round((num-whole)*100); let out=wholeToWords(whole)+" ريال سعودي"; if(frac>0) out+=" و "+wholeToWords(frac)+" هللة"; return out+" فقط لا غير";
+      function b100(n){if(n===0)return"صفر";if(n<10)return ones[n];if(n===10)return"عشرة";if(n>10&&n<20)return teens[n-10];if(n%10===0)return tens[Math.floor(n/10)];return ones[n%10]+" و "+tens[Math.floor(n/10)];}
+      function b1000(n){if(n<100)return b100(n);if(n%100===0)return hundreds[Math.floor(n/100)];return hundreds[Math.floor(n/100)]+" و "+b100(n%100);}
+      function w2w(n){if(n===0)return"صفر";let p=[];if(n>=1000000){const m=Math.floor(n/1000000);if(m===1)p.push("مليون");else if(m===2)p.push("مليونان");else if(m<=10)p.push(b1000(m)+" ملايين");else p.push(b1000(m)+" مليون");n%=1000000;}if(n>=1000){const th=Math.floor(n/1000);if(th===1)p.push("ألف");else if(th===2)p.push("ألفان");else if(th<=10)p.push(b1000(th)+" آلاف");else p.push(b1000(th)+" ألف");n%=1000;}if(n>0)p.push(b1000(n));return p.join(" و ").trim();}
+      const whole=Math.floor(num),frac=Math.round((num-whole)*100);let out=w2w(whole)+" ريال سعودي";if(frac>0)out+=" و "+w2w(frac)+" هللة";return out+" فقط";
     }
-    function getAmountInWords(total){ return { en:numberToWordsEn(total), ar:numberToWordsAr(total) }; }
+
+    function getAmountInWords(amount){return{en:numberToWordsEn(amount),ar:numberToWordsAr(amount)};}
 
     function getData(){
-      const vr=nVal($("vatRate").value)/100;
-      let sub=0,tax=0,vat=0,discTotal=0;
-      items.forEach(it=>{ const m=itemMath(it,vr); sub+=m.preVat; discTotal+=nVal(it.disc); if(it.vat) tax+=m.preVat; vat+=m.vatAmt; });
-      const exp=nVal($("expAmt").value), grand=sub+vat+exp, paid=nVal($("paidAmt").value), bal=grand-paid, rawDate=$("invDate").value||"";
-      return {
-        vr, vr100:nVal($("vatRate").value), sub, tax, vat, exp, grand, paid, bal, discTotal,
-        logo:getLS("au.logo"), shop:$("shopName").value||t("appTitle"), shopChar:(($("shopName").value||"A").trim()[0]||"A").toUpperCase(),
-        vatNo:$("shopVat").value||"", phone:$("shopPhone").value||"", addr:$("shopAddr").value||"", insta:$("shopInsta").value||"",
-        tiktok:$("shopTiktok").value||"", snap:$("shopSnap").value||"", cName:$("custName").value||(L==="ar"?"عميل مباشر":"Walk-in"),
-        cPhone:$("custPhone").value||"", invNo:$("invNo").value||nextInvoiceNo(), rawDate, invDate:rawDate?rawDate.replace("T"," ").slice(0,16):"",
-        payRaw:$("payType").value, pay:t($("payType").value)||$("payType").value, notes:$("notes").value||"", isRTL:L==="ar", showQr:$("showQr").checked,
-        items:items.map(x=>({...x}))
+      const vr=nVal($("vatRate").value)/100,vr100=nVal($("vatRate").value);
+      let sub=0,vat=0,discTotal=0,tax=0;
+      items.forEach(it=>{const m=itemMath(it,vr);sub+=m.preVat;discTotal+=nVal(it.disc);if(it.vat)tax+=m.preVat;vat+=m.vatAmt;});
+      const exp=nVal($("expAmt").value),grand=sub+vat+exp,paid=nVal($("paidAmt").value),bal=grand-paid;
+      const payRaw=$("payType").value;
+      return{
+        shop:$("shopName").value||"AURA Gold Shop",shopChar:($("shopName").value||"A").trim()[0].toUpperCase(),
+        vatNo:$("shopVat").value,phone:$("shopPhone").value,addr:$("shopAddr").value,
+        shopCr:$("shopCr").value,shopMetalLic:$("shopMetalLic").value,shopDisclaimer:$("shopDisclaimer").value,
+        insta:$("shopInsta").value,tiktok:$("shopTiktok").value,snap:$("shopSnap").value,
+        logo:getLS("au.logo")||"",
+        invNo:$("invNo").value,rawDate:$("invDate").value,
+        invDate:$("invDate").value.replace("T"," "),
+        cName:$("custName").value||"—",cPhone:$("custPhone").value,
+        vr,vr100,sub,tax,vat,exp,grand,paid,bal,discTotal,
+        pay:t(payRaw),payRaw,
+        notes:$("notes").value,showQr:$("showQr").checked,
+        items:[...items],isRTL:L==="ar"
       };
     }
 
-    function toISOForZATCA(rawDate){ try{ if(!rawDate) return new Date().toISOString(); return new Date(rawDate).toISOString(); }catch(e){ return new Date().toISOString(); } }
-    function tlvField(tag,value){ const v=enc(value); const out=new Uint8Array(2+v.length); out[0]=tag; out[1]=v.length; out.set(v,2); return out; }
-    function concatBytes(parts){ const len=parts.reduce((s,p)=>s+p.length,0); const out=new Uint8Array(len); let off=0; parts.forEach(p=>{ out.set(p,off); off+=p.length; }); return out; }
-    function bytesToBase64(bytes){ let bin=""; bytes.forEach(b=>bin+=String.fromCharCode(b)); return btoa(bin); }
-    function buildZatcaBase64(d){ const ts=toISOForZATCA(d.rawDate); const payload=concatBytes([tlvField(1,d.shop),tlvField(2,d.vatNo),tlvField(3,ts),tlvField(4,money(d.grand)),tlvField(5,money(d.vat))]); return bytesToBase64(payload); }
+    function toISOForZATCA(raw){
+      try{if(!raw)return new Date().toISOString();const d=new Date(raw.includes("T")?raw:raw.replace(" ","T"));return isNaN(d.getTime())?new Date().toISOString():d.toISOString();}catch(e){return new Date().toISOString();}
+    }
+    function tlvField(tag,val){const v=enc(val||"");const tg=new Uint8Array([tag]);const l=new Uint8Array([v.length]);return new Uint8Array([...tg,...l,...v]);}
+    function concatBytes(parts){const len=parts.reduce((s,p)=>s+p.length,0);const out=new Uint8Array(len);let off=0;parts.forEach(p=>{out.set(p,off);off+=p.length;});return out;}
+    function bytesToBase64(bytes){let bin="";bytes.forEach(b=>bin+=String.fromCharCode(b));return btoa(bin);}
+    function buildZatcaBase64(d){const ts=toISOForZATCA(d.rawDate);const payload=concatBytes([tlvField(1,d.shop),tlvField(2,d.vatNo),tlvField(3,ts),tlvField(4,money(d.grand)),tlvField(5,money(d.vat))]);return bytesToBase64(payload);}
 
     function buildScanText(d){
       const lines=[];
-      lines.push(`Seller: ${d.shop}`); lines.push(`VAT No: ${d.vatNo||"-"}`); lines.push(`Invoice No: ${d.invNo}`); lines.push(`Date: ${d.invDate}`);
-      lines.push(`Customer: ${d.cName}`); lines.push(`Phone: ${d.cPhone||"-"}`); lines.push(`Payment: ${d.pay}`);
-      lines.push(`Subtotal: SAR ${money(d.sub)}`); lines.push(`VAT (${d.vr100}%): SAR ${money(d.vat)}`);
-      if(d.exp>0) lines.push(`Expense: SAR ${money(d.exp)}`);
-      lines.push(`Grand Total: SAR ${money(d.grand)}`); lines.push(`Paid: SAR ${money(d.paid)}`); lines.push(`Balance: SAR ${money(d.bal)}`);
-      if(d.items.length){ lines.push(`Items:`); d.items.forEach((it,i)=>{ const m=itemMath(it,d.vr); lines.push(`${i+1}. ${t(it.tp)} ${t(it.kt)} ${num3(m.totalWt)}g SAR ${money(m.total)}`); }); }
+      lines.push(`Seller: ${d.shop}`);lines.push(`VAT No: ${d.vatNo||"—"}`);lines.push(`Invoice No: ${d.invNo}`);lines.push(`Date: ${d.invDate}`);
+      lines.push(`Customer: ${d.cName}`);lines.push(`Phone: ${d.cPhone||"—"}`);lines.push(`Payment: ${d.pay}`);
+      lines.push(`Subtotal: SAR ${money(d.sub)}`);lines.push(`VAT (${d.vr100}%): SAR ${money(d.vat)}`);
+      if(d.exp>0)lines.push(`Expense: SAR ${money(d.exp)}`);
+      lines.push(`Grand Total: SAR ${money(d.grand)}`);lines.push(`Paid: SAR ${money(d.paid)}`);lines.push(`Balance: SAR ${money(d.bal)}`);
       return lines.join("\n");
     }
 
-    async function generateQRDataURL(text,size=220){
-      return new Promise((resolve,reject)=>{
+    function generateQRDataURL(text,size){
+      size=size||220;
+      return new Promise(function(resolve,reject){
         try{
-          if(typeof QRCode==="undefined") return reject(new Error("QRCode library missing"));
-          const box=document.createElement("div");
-          box.style.position="fixed"; box.style.left="-9999px"; box.style.top="-9999px"; document.body.appendChild(box);
-          new QRCode(box,{text:String(text||""),width:size,height:size,colorDark:"#000000",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M});
-          setTimeout(()=>{
+          if(typeof QRCode==="undefined")return reject(new Error("QRCode not loaded"));
+          var box=document.createElement("div");
+          box.style.cssText="position:fixed;left:-9999px;top:-9999px;width:"+size+"px;height:"+size+"px;";
+          document.body.appendChild(box);
+          new QRCode(box,{text:String(text||" "),width:size,height:size,colorDark:"#000000",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M});
+          var tries=0;
+          function attempt(){
+            tries++;
             try{
-              const img=box.querySelector("img"), canvas=box.querySelector("canvas");
-              let dataURL="";
-              if(img && img.src) dataURL=img.src;
-              else if(canvas) dataURL=canvas.toDataURL("image/png");
-              box.remove();
-              if(dataURL) resolve(dataURL); else reject(new Error("QR generation failed"));
-            }catch(e){ box.remove(); reject(e); }
-          },200);
-        }catch(e){ reject(e); }
+              var img=box.querySelector("img"),canvas=box.querySelector("canvas"),dataURL="";
+              if(canvas)dataURL=canvas.toDataURL("image/png");
+              else if(img&&img.src&&img.src.startsWith("data:"))dataURL=img.src;
+              if(dataURL&&dataURL.length>100){box.remove();resolve(dataURL);}
+              else if(tries<15)setTimeout(attempt,100);
+              else{box.remove();reject(new Error("QR timeout"));}
+            }catch(e){box.remove();reject(e);}
+          }
+          setTimeout(attempt,150);
+        }catch(e){reject(e);}
       });
     }
 
-    async function getQRCodeImage(d){ const payload=buildZatcaBase64(d); return await generateQRDataURL(payload,220); }
+    async function getQRCodeImage(d){return await generateQRDataURL(buildZatcaBase64(d),220);}
 
-    function buildInvHTML(d, qrImgSrc){
-      const rows=d.items.map((it,i)=>{ const m=itemMath(it,d.vr); const desc=`${t(it.tp)} ${t(it.kt)}${nVal(it.qty)!==1?" × "+it.qty:""}`;
+    function buildInvHTML(d,qrImgSrc){
+      const rows=d.items.map((it,i)=>{
+        const m=itemMath(it,d.vr);
+        const desc=`${t(it.tp)} ${t(it.kt)}${nVal(it.qty)!==1?" × "+it.qty:""}`;
         return `<tr><td style="white-space:normal"><span class="ibadge2">${i+1}</span>${desc}</td><td>${num3(m.totalWt)}</td><td>${money(it.rate)}</td><td>${money(m.preVat)}</td><td>${money(m.vatAmt)}</td><td>${money(m.total)}</td></tr>`;
       }).join("");
-      const qrSlot=d.showQr && qrImgSrc ? `<div class="iqrb"><img src="${qrImgSrc}" alt="QR"></div>` : "";
-      const smParts=[]; if(d.insta) smParts.push(`<span class="soc"><span class="soc-ico">${socialIcon("instagram")}</span><span>${d.insta}</span></span>`);
-      if(d.tiktok) smParts.push(`<span class="soc"><span class="soc-ico">${socialIcon("tiktok")}</span><span>${d.tiktok}</span></span>`);
-      if(d.snap) smParts.push(`<span class="soc"><span class="soc-ico">${socialIcon("snapchat")}</span><span>${d.snap}</span></span>`);
-      const smRow=smParts.length ? `<div class="social-row">${smParts.join("")}</div>` : "";
-      const infoBits=[d.phone, d.vatNo ? `${t("iVatN")}: ${d.vatNo}` : "", d.addr].filter(Boolean).join("<br>");
+      const qrSlot=d.showQr&&qrImgSrc?`<div class="iqrb"><img src="${qrImgSrc}" alt="QR" width="110" height="110"></div>`:"";
+      const smParts=[];
+      if(d.insta)smParts.push(`<span class="soc"><span class="soc-ico">${socialIcon("instagram")}</span><span>${d.insta}</span></span>`);
+      if(d.tiktok)smParts.push(`<span class="soc"><span class="soc-ico">${socialIcon("tiktok")}</span><span>${d.tiktok}</span></span>`);
+      if(d.snap)smParts.push(`<span class="soc"><span class="soc-ico">${socialIcon("snapchat")}</span><span>${d.snap}</span></span>`);
+      const smRow=smParts.length?`<div class="social-row">${smParts.join("")}</div>`:"";
+      const crLine=[d.shopCr?`CR: ${d.shopCr}`:"",d.shopMetalLic?`رخصة المعادن: ${d.shopMetalLic}`:""].filter(Boolean).join(" | ");
+      const infoBits=[d.phone,d.vatNo?`${t("iVatN")}: ${d.vatNo}`:"",crLine,d.addr].filter(Boolean).join("<br>");
       const words=getAmountInWords(d.grand);
-      const amountWordsHtml=d.isRTL ? words.ar : words.en;
-      const amountWordsLabel=d.isRTL ? "المبلغ كتابة" : "Amount in Words";
+      const amountWordsHtml=d.isRTL?words.ar:words.en;
+      const amountWordsLabel=d.isRTL?"المبلغ كتابة":"Amount in Words";
+      const disclaimerHtml=d.shopDisclaimer?`<div class="disclaimer-bar">${d.shopDisclaimer}</div>`:"";
 
       return `
         <div class="istrip"></div>
-        <div class="ibody ${d.isRTL ? "inv-rtl" : ""}">
+        <div class="ibody ${d.isRTL?"inv-rtl":""}">
           <div class="ihdr">
             <div class="isbl">
-              ${d.logo ? `<img src="${d.logo}" class="ilogo" alt="">` : `<div class="ilogoph">${d.shopChar}</div>`}
+              ${d.logo?`<img src="${d.logo}" class="ilogo" alt="">`:`<div class="ilogoph">${d.shopChar}</div>`}
               <div><div class="isname">${d.shop}</div><div class="issub">${t("iShop")}</div><div class="isinfo">${infoBits}</div></div>
             </div>
             <div class="itblock">
@@ -606,25 +647,21 @@
               <div class="imeta"><strong>${t("iInv")}</strong> ${d.invNo}<br><strong>${t("iDate")}</strong> ${d.invDate}<br><strong>${t("iPay")}</strong> ${d.pay}</div>
             </div>
           </div>
-
           <div class="idiv"><div class="idivl"></div><span style="color:#c9a84c;font-size:10px">◆</span><div class="idivl"></div></div>
-
           <div class="icbar">
             <div class="icf"><div class="icl">${t("iCust")}</div><div class="icv">${d.cName}</div></div>
-            <div class="icf"><div class="icl">${t("iPhoneLbl")}</div><div class="icv">${d.cPhone || "—"}</div></div>
+            <div class="icf"><div class="icl">${t("iPhoneLbl")}</div><div class="icv">${d.cPhone||"—"}</div></div>
             <div class="icf"><div class="icl">${t("iVatR")}</div><div class="icv">${d.vr100}%</div></div>
           </div>
-
           <table class="itable">
             <colgroup><col><col><col><col><col><col></colgroup>
             <thead><tr><th>${t("iItem")}</th><th>${t("iWt")}</th><th>${t("iRate")}</th><th>${t("iPreV")}</th><th>${t("iVat")}</th><th>${t("iTotal")}</th></tr></thead>
-            <tbody>${rows || `<tr><td colspan="6" style="text-align:center;color:#999;padding:10px">—</td></tr>`}</tbody>
+            <tbody>${rows||`<tr><td colspan="6" style="text-align:center;color:#999;padding:10px">—</td></tr>`}</tbody>
           </table>
-
           <div class="ibot">
             <div class="itots">
               <table>
-                ${d.discTotal > 0 ? `<tr class="ivt"><td>${t("iDisc")}</td><td>SAR ${money(d.discTotal)}</td></tr>` : ``}
+                ${d.discTotal>0?`<tr class="ivt"><td>${t("iDisc")}</td><td>SAR ${money(d.discTotal)}</td></tr>`:""}
                 <tr class="ivt"><td>${t("iNet")}</td><td>SAR ${money(d.sub)}</td></tr>
                 <tr class="ivt"><td>${t("iVatOnly")} (${d.vr100}%)</td><td>SAR ${money(d.vat)}</td></tr>
                 <tr class="igr"><td>${t("iGrandWithVat")}</td><td>SAR ${money(d.grand)}</td></tr>
@@ -638,191 +675,195 @@
             </div>
             ${qrSlot}
           </div>
-
           <div class="iftr">
-            <div class="inotes">${d.notes ? `<strong>${t("lNotes")}:</strong> ${d.notes}<br>` : ""}${t("iThanks")}${smRow}</div>
+            <div class="inotes">${d.notes?`<strong>${t("lNotes")}:</strong> ${d.notes}<br>`:""} ${t("iThanks")}${smRow}</div>
             <div class="isig"><div class="isigline"></div><div class="isigtxt">${t("iSig")}</div></div>
           </div>
+          ${disclaimerHtml}
         </div>
-        <div class="istrip"></div>
-      `;
+        <div class="istrip"></div>`;
     }
 
+    var _rit=null;
     async function renderInvoice(){
-      const d=getData();
-      let qrImg="";
-      try{
-        if(d.showQr && typeof QRCode!=="undefined") qrImg=await getQRCodeImage(d);
-      }catch(e){
-        qrImg="";
-        console.error("QR render failed:",e);
-      }
-      $("invOut").innerHTML=buildInvHTML(d,qrImg);
-      updateBrand();
+      clearTimeout(_rit);
+      _rit=setTimeout(async function(){
+        const d=getData();
+        let qrImg="";
+        try{if(d.showQr&&typeof QRCode!=="undefined")qrImg=await getQRCodeImage(d);}catch(e){qrImg="";}
+        $("invOut").innerHTML=buildInvHTML(d,qrImg);
+        updateBrand();
+      },80);
     }
 
     function updateBrand(){
-      $("appTitle").textContent=$("shopName").value || t("appTitle");
+      $("appTitle").textContent=$("shopName").value||t("appTitle");
       $("appSub").textContent=t("appSub");
-      const logo=getLS("au.logo"), box=$("logoBox");
-      if(logo){ box.style.backgroundImage=`url('${logo}')`; box.textContent=""; }
-      else { box.style.backgroundImage="none"; box.textContent=(($("shopName").value || "A").trim()[0] || "A").toUpperCase(); }
+      const logo=getLS("au.logo"),box=$("logoBox");
+      if(logo){box.style.backgroundImage=`url('${logo}')`;box.textContent="";}
+      else{box.style.backgroundImage="none";box.textContent=(($("shopName").value||"A").trim()[0]||"A").toUpperCase();}
     }
 
     function saveSettings(){
-      saveLS("au.settings", JSON.stringify({
-        shopName:$("shopName").value, shopVat:$("shopVat").value, shopPhone:$("shopPhone").value, shopAddr:$("shopAddr").value,
-        shopInsta:$("shopInsta").value, shopTiktok:$("shopTiktok").value, shopSnap:$("shopSnap").value, lang:L
+      saveLS("au.settings",JSON.stringify({
+        shopName:$("shopName").value,shopVat:$("shopVat").value,shopPhone:$("shopPhone").value,shopAddr:$("shopAddr").value,
+        shopInsta:$("shopInsta").value,shopTiktok:$("shopTiktok").value,shopSnap:$("shopSnap").value,
+        shopCr:$("shopCr").value,shopMetalLic:$("shopMetalLic").value,shopDisclaimer:$("shopDisclaimer").value,lang:L
       }));
       updateBrand();
     }
 
     function loadSettings(){
       try{
-        const s=JSON.parse(getLS("au.settings") || "{}");
-        $("shopName").value=s.shopName || "AURA Gold Shop";
-        $("shopVat").value=s.shopVat || "";
-        $("shopPhone").value=s.shopPhone || "";
-        $("shopAddr").value=s.shopAddr || "";
-        $("shopInsta").value=s.shopInsta || "";
-        $("shopTiktok").value=s.shopTiktok || "";
-        $("shopSnap").value=s.shopSnap || "";
-        L=s.lang || "en";
+        const s=JSON.parse(getLS("au.settings")||"{}");
+        $("shopName").value=s.shopName||"AURA Gold Shop";
+        $("shopVat").value=s.shopVat||"";
+        $("shopPhone").value=s.shopPhone||"";
+        $("shopAddr").value=s.shopAddr||"";
+        $("shopInsta").value=s.shopInsta||"";
+        $("shopTiktok").value=s.shopTiktok||"";
+        $("shopSnap").value=s.shopSnap||"";
+        $("shopCr").value=s.shopCr||"";
+        $("shopMetalLic").value=s.shopMetalLic||"";
+        $("shopDisclaimer").value=s.shopDisclaimer!==undefined?s.shopDisclaimer:"وزن الحجر لا يتجاوز %5 من وزنه والبضاعه المباعه لا ترد ولاتستبدل بعد خروجها من المحل الا بقصد البيع";
+        L=s.lang||"en";
         $("langSel").value=L;
       }catch(e){}
     }
 
     function setLang(lang){
-      L=lang==="ar"?"ar":"en"; TL=T[L];
-      document.documentElement.lang=L; document.documentElement.dir=L==="ar"?"rtl":"ltr";
-      document.querySelectorAll("[data-k]").forEach(el=>{ el.textContent=t(el.dataset.k); });
-      $("appTitle").textContent=$("shopName").value || t("appTitle");
+      L=lang==="ar"?"ar":"en";TL=T[L];
+      document.documentElement.lang=L;document.documentElement.dir=L==="ar"?"rtl":"ltr";
+      document.querySelectorAll("[data-k]").forEach(el=>{el.textContent=t(el.dataset.k);});
+      $("appTitle").textContent=$("shopName").value||t("appTitle");
       $("appSub").textContent=t("appSub");
       $("payType").querySelectorAll("option").forEach(op=>op.textContent=t(op.value));
-      saveSettings(); renderItems(); calc(); renderHistory();
+      saveSettings();renderItems();calc();renderHistory();
     }
 
     function onLogo(input){
-      const file=input.files && input.files[0]; if(!file) return;
+      const file=input.files&&input.files[0];if(!file)return;
       const fr=new FileReader();
-      fr.onload=e=>{ saveLS("au.logo", e.target.result); updateBrand(); renderInvoice(); };
+      fr.onload=e=>{saveLS("au.logo",e.target.result);updateBrand();renderInvoice();};
       fr.readAsDataURL(file);
     }
-    function removeLogo(){ localStorage.removeItem("au.logo"); updateBrand(); renderInvoice(); }
+    function removeLogo(){try{localStorage.removeItem("au.logo");}catch(e){}updateBrand();renderInvoice();}
 
     function validate(){
-      const err=[]; if(!items.length) err.push("No items"); if(!$("shopName").value.trim()) err.push("Missing seller name");
-      if(!$("shopVat").value.trim()) err.push("Missing VAT number"); if(!$("invNo").value.trim()) err.push("Missing invoice number");
-      $("formErr").style.display=err.length?"block":"none"; $("formErr").textContent=err.join(", "); return !err.length;
+      const err=[];if(!items.length)err.push("No items");if(!$("shopName").value.trim())err.push("Missing seller name");
+      if(!$("shopVat").value.trim())err.push("Missing VAT number");if(!$("invNo").value.trim())err.push("Missing invoice number");
+      $("formErr").style.display=err.length?"block":"none";$("formErr").textContent=err.join(", ");return !err.length;
     }
 
     function saveInvoice(){
-      if(!validate()) return;
-      const arr=getInvoices(), data=getData();
-      data.items=items.map(x=>({...x})); data.savedAt=new Date().toISOString();
-      const idx=arr.findIndex(x=>x.invNo===data.invNo); if(idx>=0) arr[idx]=data; else arr.unshift(data);
-      setInvoices(arr); renderHistory(); toast(t("saved"));
+      if(!validate())return;
+      try{
+        const arr=getInvoices(),data=getData();
+        data.items=items.map(x=>({...x}));data.savedAt=new Date().toISOString();
+        const idx=arr.findIndex(x=>x.invNo===data.invNo);if(idx>=0)arr[idx]=data;else arr.unshift(data);
+        setInvoices(arr);renderHistory();toast(t("saved"));
+      }catch(e){alert("Save failed: "+e.message);}
     }
 
     function loadInvoice(data){
-      $("invNo").value=data.invNo || useInvoiceNo();
-      $("invDate").value=data.rawDate || (data.invDate ? data.invDate.replace(" ","T").slice(0,16) : nowLocal());
-      $("custName").value=data.cName || ""; $("custPhone").value=data.cPhone || ""; $("vatRate").value=nVal(data.vr100 || 15);
-      $("paidAmt").value=nVal(data.paid || 0); $("payType").value=["Cash","Card","Transfer","Mixed","Credit"].includes(data.payRaw)?data.payRaw:"Cash";
-      $("expAmt").value=nVal(data.exp || 0); $("notes").value=data.notes || ""; $("showQr").checked=data.showQr !== false;
-      items=Array.isArray(data.items) && data.items.length ? data.items.map(mkItem) : [mkItem()];
-      renderItems(); calc();
+      $("invNo").value=data.invNo||useInvoiceNo();
+      $("invDate").value=data.rawDate||(data.invDate?data.invDate.replace(" ","T").slice(0,16):nowLocal());
+      $("custName").value=data.cName||"";$("custPhone").value=data.cPhone||"";$("vatRate").value=nVal(data.vr100||15);
+      $("paidAmt").value=nVal(data.paid||0);$("payType").value=["Cash","Card","Transfer","Mixed","Credit"].includes(data.payRaw)?data.payRaw:"Cash";
+      $("expAmt").value=nVal(data.exp||0);$("notes").value=data.notes||"";$("showQr").checked=data.showQr!==false;
+      items=Array.isArray(data.items)&&data.items.length?data.items.map(mkItem):[mkItem()];
+      renderItems();calc();
     }
 
     function renderHistory(){
-      const q=($("histQ").value || "").toLowerCase().trim(), host=$("histHost");
-      const arr=getInvoices().filter(x=>{ const hay=[x.invNo,x.cName,x.cPhone,x.shop].join(" ").toLowerCase(); return !q || hay.includes(q); });
-      if(!arr.length){ host.innerHTML=`<div class="hitem" style="text-align:center;color:#7b6b4a">${t("lNoSaved")}</div>`; return; }
+      const q=($("histQ").value||"").toLowerCase().trim(),host=$("histHost");
+      const arr=getInvoices().filter(x=>{const hay=[x.invNo,x.cName,x.cPhone,x.shop].join(" ").toLowerCase();return !q||hay.includes(q);});
+      if(!arr.length){host.innerHTML=`<div class="hitem" style="text-align:center;color:#7b6b4a">${t("lNoSaved")}</div>`;return;}
       host.innerHTML=arr.map((x,i)=>`
         <div class="hitem">
           <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
             <div>
-              <div style="font-weight:900">${x.invNo || "-"}</div>
-              <div style="font-size:12px;color:#7b6b4a">${x.cName || "-"} • ${x.invDate || ""}</div>
-              <div style="font-size:12px;color:#7b6b4a">SAR ${money(x.grand || 0)}</div>
+              <div style="font-weight:900">${x.invNo||"—"}</div>
+              <div style="font-size:12px;color:#7b6b4a">${x.cName||"—"} • ${x.invDate||""}</div>
+              <div style="font-size:12px;color:#7b6b4a">SAR ${money(x.grand||0)}</div>
             </div>
             <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end">
               <button class="sm lt au" onclick="loadHistoryIndex(${i})">${t("lLoad")}</button>
               <button class="sm rd au" onclick="deleteHistoryIndex(${i})">${t("lDel")}</button>
             </div>
           </div>
-        </div>
-      `).join("");
+        </div>`).join("");
     }
 
     function loadHistoryIndex(i){
-      const arr=getInvoices(), q=($("histQ").value || "").toLowerCase().trim();
-      const filtered=arr.filter(x=>{ const hay=[x.invNo,x.cName,x.cPhone,x.shop].join(" ").toLowerCase(); return !q || hay.includes(q); });
-      if(filtered[i]) loadInvoice(filtered[i]);
+      const arr=getInvoices(),q=($("histQ").value||"").toLowerCase().trim();
+      const filtered=arr.filter(x=>{const hay=[x.invNo,x.cName,x.cPhone,x.shop].join(" ").toLowerCase();return !q||hay.includes(q);});
+      if(filtered[i])loadInvoice(filtered[i]);
     }
 
     function deleteHistoryIndex(i){
-      if(!confirm(t("confirmDel"))) return;
-      const arr=getInvoices(), q=($("histQ").value || "").toLowerCase().trim();
-      const filtered=arr.filter(x=>{ const hay=[x.invNo,x.cName,x.cPhone,x.shop].join(" ").toLowerCase(); return !q || hay.includes(q); });
-      const target=filtered[i]; if(!target) return; setInvoices(arr.filter(x=>x.invNo!==target.invNo)); renderHistory();
+      if(!safeConfirm(t("confirmDel")))return;
+      const arr=getInvoices(),q=($("histQ").value||"").toLowerCase().trim();
+      const filtered=arr.filter(x=>{const hay=[x.invNo,x.cName,x.cPhone,x.shop].join(" ").toLowerCase();return !q||hay.includes(q);});
+      const target=filtered[i];if(!target)return;setInvoices(arr.filter(x=>x.invNo!==target.invNo));renderHistory();
     }
 
     function exportBackup(){
-      const payload={settings:JSON.parse(getLS("au.settings")||"{}"), logo:getLS("au.logo")||null, counter:getLS("au.cnt")||"1", invoices:getInvoices()};
-      const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
-      const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="AURAGoldZATCAProBackup.json"; a.click(); URL.revokeObjectURL(a.href);
+      try{
+        const payload={settings:JSON.parse(getLS("au.settings")||"{}"),logo:getLS("au.logo")||null,counter:getLS("au.cnt")||"1",invoices:getInvoices()};
+        const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+        const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="AURAGoldZATCAProBackup.json";document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);
+      }catch(e){alert("Export failed: "+e.message);}
     }
 
     function onImport(input){
-      const file=input.files && input.files[0]; if(!file) return;
+      const file=input.files&&input.files[0];if(!file)return;
       const fr=new FileReader();
       fr.onload=e=>{
         try{
           const data=JSON.parse(e.target.result);
-          if(data.settings) saveLS("au.settings", JSON.stringify(data.settings));
-          if(data.logo) saveLS("au.logo", data.logo);
-          if(data.counter) saveLS("au.cnt", String(data.counter));
-          if(Array.isArray(data.invoices)) setInvoices(data.invoices);
-          loadSettings(); setLang(L); renderHistory(); toast(t("imported"));
-        }catch(err){ alert("Invalid JSON backup"); }
+          if(data.settings)saveLS("au.settings",JSON.stringify(data.settings));
+          if(data.logo)saveLS("au.logo",data.logo);
+          if(data.counter)saveLS("au.cnt",String(data.counter));
+          if(Array.isArray(data.invoices))setInvoices(data.invoices);
+          loadSettings();setLang(L);renderHistory();toast(t("imported"));
+        }catch(err){alert("Invalid JSON backup");}
         input.value="";
       };
       fr.readAsText(file);
     }
 
     async function previewScanData(){
-      const d=getData(); const payload=buildZatcaBase64(d);
-      alert("ZATCA Base64 QR Payload:\n\n" + payload + "\n\n" + "Human-readable invoice data:\n\n" + buildScanText(d));
+      const d=getData();alert("ZATCA QR Payload:\n\n"+buildZatcaBase64(d)+"\n\nInvoice Data:\n\n"+buildScanText(d));
     }
 
     async function doPrint(){
-      if(!validate()) return;
+      if(!validate())return;
       const d=getData();
       let qrImg="";
-      try{
-        if(d.showQr && typeof QRCode!=="undefined") qrImg=await getQRCodeImage(d);
-      }catch(e){ qrImg=""; }
-
+      try{if(d.showQr&&typeof QRCode!=="undefined")qrImg=await getQRCodeImage(d);}catch(e){qrImg="";}
       const invHTML=buildInvHTML(d,qrImg);
       $("invOut").innerHTML=invHTML;
-
       const pa=$("printArea");
       pa.innerHTML=invHTML;
       pa.style.display="block";
-
-      // iOS Safari needs a real delay after DOM update before print
       setTimeout(function(){
-        try{ window.print(); }catch(err){}
-        // hide after print dialog opens
-        setTimeout(function(){ pa.style.display="none"; }, 2000);
-      }, 600);
+        try{window.print();}catch(err){}
+        setTimeout(function(){pa.style.display="none";},2000);
+      },600);
     }
 
+    window.addEventListener("afterprint",function(){
+      try{var pa=$("printArea");if(pa)pa.style.display="none";}catch(e){}
+    });
+    window.addEventListener("focus",function(){
+      try{var pa=$("printArea");if(pa&&pa.style.display==="block")pa.style.display="none";}catch(e){}
+    });
+
     function newInvoice(){
-      $("invNo").value=useInvoiceNo(); $("invDate").value=nowLocal(); $("custName").value=""; $("custPhone").value="";
-      $("vatRate").value=15; $("paidAmt").value=0; $("payType").value="Cash"; $("expAmt").value=0; $("notes").value=""; $("showQr").checked=true;
-      items=[mkItem()]; renderItems(); calc();
+      $("invNo").value=useInvoiceNo();$("invDate").value=nowLocal();$("custName").value="";$("custPhone").value="";
+      $("vatRate").value=15;$("paidAmt").value=0;$("payType").value="Cash";$("expAmt").value=0;$("notes").value="";$("showQr").checked=true;
+      items=[mkItem()];renderItems();calc();
     }
 
     $("langSel").addEventListener("change",e=>setLang(e.target.value));
@@ -830,7 +871,7 @@
     try{
       loadSettings();
       restorePanels();
-      if(!getLS("au.cnt")) saveLS("au.cnt","1");
+      if(!getLS("au.cnt"))saveLS("au.cnt","1");
       $("invNo").value=useInvoiceNo();
       $("invDate").value=nowLocal();
       items=[mkItem()];
@@ -841,57 +882,8 @@
       renderHistory();
       applyLockState();
     }catch(e){
-      console.error("App init failed:",e);
-      alert("App failed to load on this device. Please reopen the file in Chrome and allow internet access.");
-    }
-
-    // ══════════════════════════════════════════
-    // SHOP LOCK SYSTEM
-    // Change this password to your own secret:
-    const ADMIN_PASSWORD = "aura2024";
-    // ══════════════════════════════════════════
-
-    function isShopLocked(){
-      return getLS("au.shoplock") === "1";
-    }
-
-    function applyLockState(){
-      const locked = isShopLocked();
-      const banner = $("shopLockBanner");
-      const fields = $("shopFields");
-      if(locked){
-        banner.style.display = "flex";
-        fields.classList.add("locked-overlay");
-        // Disable all inputs inside shopFields
-        fields.querySelectorAll("input,select,textarea,button").forEach(el => {
-          el.setAttribute("disabled","disabled");
-        });
-      } else {
-        banner.style.display = "none";
-        fields.classList.remove("locked-overlay");
-        fields.querySelectorAll("input,select,textarea,button").forEach(el => {
-          el.removeAttribute("disabled");
-        });
-      }
-    }
-
-    function lockShop(){
-      saveLS("au.shoplock","1");
-      applyLockState();
-      toast("🔒 Shop info locked!");
-    }
-
-    function unlockShop(){
-      const pwd = prompt("Enter admin password to unlock shop info:");
-      if(pwd === null) return; // cancelled
-      if(pwd === ADMIN_PASSWORD){
-        saveLS("au.shoplock","0");
-        applyLockState();
-        toast("🔓 Shop info unlocked!");
-      } else {
-        alert("❌ Wrong password. Access denied.");
-      }
+      console.error("Init failed:",e);
+      alert("App failed to initialize: "+e.message);
     }
   </script>
-</body>
-</html>
+</body
