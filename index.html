@@ -4,8 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
   <meta name="theme-color" content="#0a0a0a" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>AURA Gold ZATCA Pro</title>
   <style>
     :root{
@@ -30,7 +28,7 @@
     .bname{color:#fff;font-size:15px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .bsub{color:var(--gold);font-size:10px;letter-spacing:1px;text-transform:uppercase}
     #langSel{background:#222;color:#fff;border:1px solid #444;border-radius:8px;padding:6px 8px;font-size:13px;min-height:36px;width:100px}
-    .app{max-width:520px;margin:0 auto;padding:10px 10px 100px}
+    .app{max-width:520px;margin:0 auto;padding:10px 10px 80px}
     .panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 4px 20px rgba(0,0,0,.07);margin-bottom:11px;overflow:hidden}
     .ph{background:linear-gradient(135deg,#0a0a0a,#251e0a);padding:12px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
     .ph-ttl{color:var(--gold);font-size:13px;font-weight:800;flex:1}
@@ -78,14 +76,11 @@
     .trow.grn{color:var(--green)}
     .nav{
       position:fixed;bottom:0;left:0;right:0;z-index:50;background:rgba(10,10,10,.97);border-top:1px solid #2a2a2a;
-      padding:8px 12px;padding-bottom:calc(8px + env(safe-area-inset-bottom));
-      display:grid;grid-template-columns:repeat(4,1fr);gap:6px;backdrop-filter:blur(16px);
-      -webkit-backdrop-filter:blur(16px)
+      padding:8px 12px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;backdrop-filter:blur(16px)
     }
     .nb{
       background:transparent;border:1px solid #333;border-radius:11px;min-height:52px;color:#fff;font-size:11px;font-weight:700;
-      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;
-      -webkit-appearance:none;appearance:none
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer
     }
     .nb.gold{background:linear-gradient(135deg,var(--gold),var(--gold4));border-color:transparent}
     .nb.blue{background:var(--blue);border-color:transparent}
@@ -94,10 +89,8 @@
     .hidden{display:none !important}
     .err{display:none;background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:10px 12px;color:var(--red);font-size:13px;font-weight:700;margin-top:8px}
     #toast{
-      position:fixed;bottom:calc(82px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);
-      background:#1a1a1a;color:var(--gold3);padding:10px 18px;
-      border-radius:11px;font-size:13px;font-weight:800;z-index:9999;border:1px solid var(--gold4);
-      opacity:0;pointer-events:none;transition:opacity .3s;white-space:nowrap
+      position:fixed;bottom:82px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:var(--gold3);padding:10px 18px;
+      border-radius:11px;font-size:13px;font-weight:800;z-index:9999;border:1px solid var(--gold4);opacity:0;pointer-events:none;transition:opacity .3s
     }
     #invOut{background:#fff;width:100%;display:block;font-family:Georgia,serif;color:#1a1201;min-height:120px}
     .istrip{height:5px;background:linear-gradient(90deg,#7a5c1e,#c9a84c 30%,#f5e6c0 50%,#c9a84c 70%,#7a5c1e)}
@@ -184,11 +177,10 @@
     html[dir="rtl"] .g2,html[dir="rtl"] .ihead,html[dir="rtl"] .srow,html[dir="rtl"] .trow,html[dir="rtl"] .ph,html[dir="rtl"] .brand{direction:rtl}
     html[dir="rtl"] .chk{flex-direction:row-reverse}
     html[dir="rtl"] .nav{direction:rtl}
-    #printArea{display:none}
     @media print{
       html,body{background:#fff !important;margin:0 !important;padding:0 !important;-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
       .topbar,.app,.nav,#toast{display:none !important}
-      #printArea{display:block !important;position:static !important}
+      #printArea{display:block !important}
     }
     @media (max-width:420px){
       .g2{grid-template-columns:1fr}
@@ -196,7 +188,6 @@
       .iqrb{margin-top:10px}
       .inotes{max-width:none;margin-bottom:10px}
     }
-    #qrLibStatus{display:none;background:#fef9e7;border:1px solid #f0c040;border-radius:9px;padding:8px 12px;font-size:12px;color:#7a5c1e;font-weight:700;margin-bottom:8px;text-align:center}
   </style>
 </head>
 <body>
@@ -215,8 +206,6 @@
   </div>
 
   <div class="app">
-    <div id="qrLibStatus">⚠️ QR library loading... Please wait or check internet connection.</div>
-
     <div class="panel" id="pShop">
       <div class="ph" onclick="togglePanel('pShop')"><span class="ph-ttl" data-k="shop">Shop Info</span><span class="ph-arr">▾</span></div>
       <div class="pb g1">
@@ -329,41 +318,18 @@
     </div>
   </div>
 
-  <div id="printArea"></div>
+  <div id="printArea" class="hidden"></div>
   <div class="nav">
     <button class="nb gold" onclick="addItem()"><span class="ni">＋</span><span data-k="lAddItem">Add</span></button>
     <button class="nb" onclick="saveInvoice()"><span class="ni">💾</span><span data-k="lSave">Save</span></button>
-    <button class="nb" onclick="confirmNewInvoice()"><span class="ni">🆕</span><span data-k="lNew">New</span></button>
+    <button class="nb" onclick="if(confirm(TL.confirmNew)) newInvoice()"><span class="ni">🆕</span><span data-k="lNew">New</span></button>
     <button class="nb blue" onclick="doPrint()"><span class="ni">🖨️</span><span data-k="lPrint">Print</span></button>
   </div>
 
   <div id="toast"></div>
   <input id="importFile" type="file" accept="application/json" class="hidden" onchange="onImport(this)" />
 
-  <script>
-  (function(){
-    // ── QR Library loader with retry ──
-    var QR_LOADED = false;
-    var QR_LOADING = false;
-    function loadQRLib(cb){
-      if(typeof QRCode !== "undefined"){ QR_LOADED=true; cb && cb(); return; }
-      if(QR_LOADING){ setTimeout(function(){ loadQRLib(cb); }, 300); return; }
-      QR_LOADING = true;
-      var s = document.createElement("script");
-      s.src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js";
-      s.onload = function(){ QR_LOADED=true; QR_LOADING=false; document.getElementById("qrLibStatus").style.display="none"; cb && cb(); };
-      s.onerror = function(){
-        QR_LOADING=false;
-        var st=document.getElementById("qrLibStatus");
-        st.style.display="block";
-        st.textContent="⚠️ QR code library failed to load. Check internet and reload.";
-      };
-      document.head.appendChild(s);
-    }
-    loadQRLib(function(){ renderInvoice(); });
-  })();
-  </script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script>
     const T = {
       en: {
@@ -426,8 +392,8 @@
     const enc = txt => new TextEncoder().encode(String(txt ?? ""));
 
     function toast(msg){ const el=$("toast"); el.textContent=msg; el.style.opacity=1; clearTimeout(el._t); el._t=setTimeout(()=>el.style.opacity=0,1800); }
-    function saveLS(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
-    function getLS(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+    function saveLS(k,v){ localStorage.setItem(k,v); }
+    function getLS(k){ return localStorage.getItem(k); }
     function getInvoices(){ try{ const x=JSON.parse(getLS("au.inv")||"[]"); return Array.isArray(x)?x:[]; }catch(e){ return []; } }
     function setInvoices(x){ saveLS("au.inv", JSON.stringify(x)); }
     function nextInvoiceNo(){ const y=String(new Date().getFullYear()).slice(-2); let c=parseInt(getLS("au.cnt")||"1",10); if(!Number.isFinite(c)||c<1)c=1; return `SINV-${y}-${String(c).padStart(4,"0")}`; }
@@ -436,10 +402,6 @@
     function newInvoiceNo(){ $("invNo").value=useInvoiceNo(); $("invDate").value=nowLocal(); renderInvoice(); }
     function togglePanel(id){ const p=$(id); if(!p)return; p.classList.toggle("closed"); saveLS("au.panel."+id, p.classList.contains("closed")?"1":"0"); }
     function restorePanels(){ ["pShop","pCust","pItems","pTotals","pHist","pTools"].forEach(id=>{ if(getLS("au.panel."+id)==="1") $(id).classList.add("closed"); }); }
-
-    // ── iOS-safe confirm ──
-    function safeConfirm(msg){ try{ return window.confirm(msg); }catch(e){ return true; } }
-    function confirmNewInvoice(){ if(safeConfirm(TL.confirmNew)) newInvoice(); }
 
     function mkItem(d={}){ return { tp:d.tp||"Ring", kt:d.kt||"22K", un:d.un||"Gram", qty:nVal(d.qty||1), wt:nVal(d.wt||0), rate:nVal(d.rate||0), mkg:nVal(d.mkg||0), disc:nVal(d.disc||0), vat:d.vat!==false }; }
     function itemMath(it,vr){ const totalWt=Math.max(0,nVal(it.qty)*nVal(it.wt)); const preVat=Math.max(0,totalWt*nVal(it.rate)+nVal(it.mkg)-nVal(it.disc)); const vatAmt=it.vat?preVat*vr:0; const total=preVat+vatAmt; return {totalWt,preVat,vatAmt,total}; }
@@ -523,7 +485,6 @@
       function wholeToWords(n){ if(n===0) return "Zero"; let parts=[]; if(n>=1000000){ parts.push(below1000(Math.floor(n/1000000))+" Million"); n%=1000000; } if(n>=1000){ parts.push(below1000(Math.floor(n/1000))+" Thousand"); n%=1000; } if(n>0) parts.push(below1000(n)); return parts.join(" ").trim(); }
       const whole=Math.floor(num), frac=Math.round((num-whole)*100); let out=wholeToWords(whole)+" Saudi Riyals"; if(frac>0) out+=" and "+wholeToWords(frac)+" Halalas"; return out+" Only";
     }
-
     function numberToWordsAr(num){
       num=Math.round((Number(num)||0)*100)/100;
       const ones=["","واحد","اثنان","ثلاثة","أربعة","خمسة","ستة","سبعة","ثمانية","تسعة"];
@@ -532,52 +493,37 @@
       const hundreds=["","مائة","مائتان","ثلاثمائة","أربعمائة","خمسمائة","ستمائة","سبعمائة","ثمانمائة","تسعمائة"];
       function below100(n){ if(n===0) return "صفر"; if(n<10) return ones[n]; if(n===10) return "عشرة"; if(n>10&&n<20) return teens[n-10]; if(n%10===0) return tens[Math.floor(n/10)]; return ones[n%10]+" و "+tens[Math.floor(n/10)]; }
       function below1000(n){ if(n<100) return below100(n); if(n%100===0) return hundreds[Math.floor(n/100)]; return hundreds[Math.floor(n/100)]+" و "+below100(n%100); }
-      function wholeToWords(n){ if(n===0) return "صفر"; let parts=[]; if(n>=1000000){ const m=Math.floor(n/1000000); if(m===1) parts.push("مليون"); else if(m===2) parts.push("مليونان"); else if(m<=10) parts.push(below1000(m)+" ملايين"); else parts.push(below1000(m)+" مليون"); n%=1000000; } if(n>=1000){ const th=Math.floor(n/1000); if(th===1) parts.push("ألف"); else if(th===2) parts.push("ألفان"); else if(th<=10) parts.push(below1000(th)+" آلاف"); else parts.push(below1000(th)+" ألف"); n%=1000; } if(n>0) parts.push(below1000(n)); return parts.join(" و ").trim(); }
-      const whole=Math.floor(num), frac=Math.round((num-whole)*100); let out=wholeToWords(whole)+" ريال سعودي"; if(frac>0) out+=" و "+wholeToWords(frac)+" هللة"; return out+" فقط";
+      function wholeToWords(n){ if(n===0) return "صفر"; let parts=[]; if(n>=1000000){ const m=Math.floor(n/1000000); if(m===1) parts.push("مليون"); else if(m===2) parts.push("مليونان"); else if(m<=10) parts.push(below1000(m)+" ملايين"); else parts.push(below1000(m)+" مليون"); n%=1000000; } if(n>=1000){ const th=Math.floor(n/1000); if(th===1) parts.push("ألف"); else if(th===2) parts.push("ألفان"); else if(th<=10) parts.push(below1000(th)+" آلاف"); else parts.push(below1000(th)+" ألف"); n%=1000; } if(n>0) parts.push(below1000(n)); return parts.join(" و "); }
+      const whole=Math.floor(num), frac=Math.round((num-whole)*100); let out=wholeToWords(whole)+" ريال سعودي"; if(frac>0) out+=" و "+wholeToWords(frac)+" هللة"; return out+" فقط لا غير";
     }
-
-    function getAmountInWords(amount){ return { en: numberToWordsEn(amount), ar: numberToWordsAr(amount) }; }
+    function getAmountInWords(total){ return { en:numberToWordsEn(total), ar:numberToWordsAr(total) }; }
 
     function getData(){
-      const vr=nVal($("vatRate").value)/100, vr100=nVal($("vatRate").value);
-      let sub=0,vat=0,discTotal=0;
-      items.forEach(it=>{ const m=itemMath(it,vr); sub+=m.preVat; discTotal+=nVal(it.disc); vat+=m.vatAmt; });
-      const exp=nVal($("expAmt").value), grand=sub+vat+exp, paid=nVal($("paidAmt").value), bal=grand-paid;
-      const payRaw=$("payType").value;
+      const vr=nVal($("vatRate").value)/100;
+      let sub=0,tax=0,vat=0,discTotal=0;
+      items.forEach(it=>{ const m=itemMath(it,vr); sub+=m.preVat; discTotal+=nVal(it.disc); if(it.vat) tax+=m.preVat; vat+=m.vatAmt; });
+      const exp=nVal($("expAmt").value), grand=sub+vat+exp, paid=nVal($("paidAmt").value), bal=grand-paid, rawDate=$("invDate").value||"";
       return {
-        shop:$("shopName").value||"AURA Gold Shop", shopChar:($("shopName").value||"A").trim()[0].toUpperCase(),
-        vatNo:$("shopVat").value, phone:$("shopPhone").value, addr:$("shopAddr").value,
-        insta:$("shopInsta").value, tiktok:$("shopTiktok").value, snap:$("shopSnap").value,
-        logo:getLS("au.logo")||"",
-        invNo:$("invNo").value, rawDate:$("invDate").value,
-        invDate:$("invDate").value.replace("T"," "),
-        cName:$("custName").value||"—", cPhone:$("custPhone").value,
-        vr, vr100, sub, vat, exp, grand, paid, bal, discTotal,
-        pay:t(payRaw), payRaw,
-        notes:$("notes").value, showQr:$("showQr").checked,
-        items:[...items], isRTL:L==="ar"
+        vr, vr100:nVal($("vatRate").value), sub, tax, vat, exp, grand, paid, bal, discTotal,
+        logo:getLS("au.logo"), shop:$("shopName").value||t("appTitle"), shopChar:(($("shopName").value||"A").trim()[0]||"A").toUpperCase(),
+        vatNo:$("shopVat").value||"", phone:$("shopPhone").value||"", addr:$("shopAddr").value||"", insta:$("shopInsta").value||"",
+        tiktok:$("shopTiktok").value||"", snap:$("shopSnap").value||"", cName:$("custName").value||(L==="ar"?"عميل مباشر":"Walk-in"),
+        cPhone:$("custPhone").value||"", invNo:$("invNo").value||nextInvoiceNo(), rawDate, invDate:rawDate?rawDate.replace("T"," ").slice(0,16):"",
+        payRaw:$("payType").value, pay:t($("payType").value)||$("payType").value, notes:$("notes").value||"", isRTL:L==="ar", showQr:$("showQr").checked,
+        items:items.map(x=>({...x}))
       };
     }
 
-    function toISOForZATCA(raw){
-      try{
-        if(!raw) return new Date().toISOString();
-        const d=new Date(raw.includes("T")?raw:raw.replace(" ","T"));
-        return isNaN(d.getTime())?new Date().toISOString():d.toISOString();
-      }catch(e){ return new Date().toISOString(); }
-    }
-
-    function tlvField(tag,val){
-      const v=enc(val||""); const t=new Uint8Array([tag]); const l=new Uint8Array([v.length]); return new Uint8Array([...t,...l,...v]);
-    }
+    function toISOForZATCA(rawDate){ try{ if(!rawDate) return new Date().toISOString(); return new Date(rawDate).toISOString(); }catch(e){ return new Date().toISOString(); } }
+    function tlvField(tag,value){ const v=enc(value); const out=new Uint8Array(2+v.length); out[0]=tag; out[1]=v.length; out.set(v,2); return out; }
     function concatBytes(parts){ const len=parts.reduce((s,p)=>s+p.length,0); const out=new Uint8Array(len); let off=0; parts.forEach(p=>{ out.set(p,off); off+=p.length; }); return out; }
     function bytesToBase64(bytes){ let bin=""; bytes.forEach(b=>bin+=String.fromCharCode(b)); return btoa(bin); }
     function buildZatcaBase64(d){ const ts=toISOForZATCA(d.rawDate); const payload=concatBytes([tlvField(1,d.shop),tlvField(2,d.vatNo),tlvField(3,ts),tlvField(4,money(d.grand)),tlvField(5,money(d.vat))]); return bytesToBase64(payload); }
 
     function buildScanText(d){
       const lines=[];
-      lines.push(`Seller: ${d.shop}`); lines.push(`VAT No: ${d.vatNo||"—"}`); lines.push(`Invoice No: ${d.invNo}`); lines.push(`Date: ${d.invDate}`);
-      lines.push(`Customer: ${d.cName}`); lines.push(`Phone: ${d.cPhone||"—"}`); lines.push(`Payment: ${d.pay}`);
+      lines.push(`Seller: ${d.shop}`); lines.push(`VAT No: ${d.vatNo||"-"}`); lines.push(`Invoice No: ${d.invNo}`); lines.push(`Date: ${d.invDate}`);
+      lines.push(`Customer: ${d.cName}`); lines.push(`Phone: ${d.cPhone||"-"}`); lines.push(`Payment: ${d.pay}`);
       lines.push(`Subtotal: SAR ${money(d.sub)}`); lines.push(`VAT (${d.vr100}%): SAR ${money(d.vat)}`);
       if(d.exp>0) lines.push(`Expense: SAR ${money(d.exp)}`);
       lines.push(`Grand Total: SAR ${money(d.grand)}`); lines.push(`Paid: SAR ${money(d.paid)}`); lines.push(`Balance: SAR ${money(d.bal)}`);
@@ -585,29 +531,23 @@
       return lines.join("\n");
     }
 
-    function generateQRDataURL(text,size){
-      size=size||220;
-      return new Promise(function(resolve,reject){
+    async function generateQRDataURL(text,size=220){
+      return new Promise((resolve,reject)=>{
         try{
-          if(typeof QRCode==="undefined") return reject(new Error("QRCode library not loaded"));
-          var box=document.createElement("div");
-          box.style.cssText="position:fixed;left:-9999px;top:-9999px;width:"+size+"px;height:"+size+"px;";
-          document.body.appendChild(box);
-          new QRCode(box,{text:String(text||" "),width:size,height:size,colorDark:"#000000",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M});
-          var tries=0;
-          function attempt(){
-            tries++;
+          if(typeof QRCode==="undefined") return reject(new Error("QRCode library missing"));
+          const box=document.createElement("div");
+          box.style.position="fixed"; box.style.left="-9999px"; box.style.top="-9999px"; document.body.appendChild(box);
+          new QRCode(box,{text:String(text||""),width:size,height:size,colorDark:"#000000",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M});
+          setTimeout(()=>{
             try{
-              var img=box.querySelector("img"), canvas=box.querySelector("canvas");
-              var dataURL="";
-              if(canvas){ dataURL=canvas.toDataURL("image/png"); }
-              else if(img && img.src && img.src.startsWith("data:")){ dataURL=img.src; }
-              if(dataURL && dataURL.length>100){ box.remove(); resolve(dataURL); }
-              else if(tries<15){ setTimeout(attempt,100); }
-              else { box.remove(); reject(new Error("QR generation timeout")); }
+              const img=box.querySelector("img"), canvas=box.querySelector("canvas");
+              let dataURL="";
+              if(img && img.src) dataURL=img.src;
+              else if(canvas) dataURL=canvas.toDataURL("image/png");
+              box.remove();
+              if(dataURL) resolve(dataURL); else reject(new Error("QR generation failed"));
             }catch(e){ box.remove(); reject(e); }
-          }
-          setTimeout(attempt,150);
+          },200);
         }catch(e){ reject(e); }
       });
     }
@@ -618,7 +558,7 @@
       const rows=d.items.map((it,i)=>{ const m=itemMath(it,d.vr); const desc=`${t(it.tp)} ${t(it.kt)}${nVal(it.qty)!==1?" × "+it.qty:""}`;
         return `<tr><td style="white-space:normal"><span class="ibadge2">${i+1}</span>${desc}</td><td>${num3(m.totalWt)}</td><td>${money(it.rate)}</td><td>${money(m.preVat)}</td><td>${money(m.vatAmt)}</td><td>${money(m.total)}</td></tr>`;
       }).join("");
-      const qrSlot=d.showQr && qrImgSrc ? `<div class="iqrb"><img src="${qrImgSrc}" alt="QR" width="110" height="110"></div>` : "";
+      const qrSlot=d.showQr && qrImgSrc ? `<div class="iqrb"><img src="${qrImgSrc}" alt="QR"></div>` : "";
       const smParts=[]; if(d.insta) smParts.push(`<span class="soc"><span class="soc-ico">${socialIcon("instagram")}</span><span>${d.insta}</span></span>`);
       if(d.tiktok) smParts.push(`<span class="soc"><span class="soc-ico">${socialIcon("tiktok")}</span><span>${d.tiktok}</span></span>`);
       if(d.snap) smParts.push(`<span class="soc"><span class="soc-ico">${socialIcon("snapchat")}</span><span>${d.snap}</span></span>`);
@@ -683,18 +623,17 @@
       `;
     }
 
-    var _renderInvoiceTimer = null;
     async function renderInvoice(){
-      clearTimeout(_renderInvoiceTimer);
-      _renderInvoiceTimer = setTimeout(async function(){
-        const d=getData();
-        let qrImg="";
-        try{
-          if(d.showQr && typeof QRCode!=="undefined"){ qrImg=await getQRCodeImage(d); }
-        }catch(e){ qrImg=""; }
-        $("invOut").innerHTML=buildInvHTML(d,qrImg);
-        updateBrand();
-      }, 80);
+      const d=getData();
+      let qrImg="";
+      try{
+        if(d.showQr && typeof QRCode!=="undefined") qrImg=await getQRCodeImage(d);
+      }catch(e){
+        qrImg="";
+        console.error("QR render failed:",e);
+      }
+      $("invOut").innerHTML=buildInvHTML(d,qrImg);
+      updateBrand();
     }
 
     function updateBrand(){
@@ -744,7 +683,7 @@
       fr.onload=e=>{ saveLS("au.logo", e.target.result); updateBrand(); renderInvoice(); };
       fr.readAsDataURL(file);
     }
-    function removeLogo(){ try{ localStorage.removeItem("au.logo"); }catch(e){} updateBrand(); renderInvoice(); }
+    function removeLogo(){ localStorage.removeItem("au.logo"); updateBrand(); renderInvoice(); }
 
     function validate(){
       const err=[]; if(!items.length) err.push("No items"); if(!$("shopName").value.trim()) err.push("Missing seller name");
@@ -754,12 +693,10 @@
 
     function saveInvoice(){
       if(!validate()) return;
-      try{
-        const arr=getInvoices(), data=getData();
-        data.items=items.map(x=>({...x})); data.savedAt=new Date().toISOString();
-        const idx=arr.findIndex(x=>x.invNo===data.invNo); if(idx>=0) arr[idx]=data; else arr.unshift(data);
-        setInvoices(arr); renderHistory(); toast(t("saved"));
-      }catch(e){ alert("Save failed: "+e.message); }
+      const arr=getInvoices(), data=getData();
+      data.items=items.map(x=>({...x})); data.savedAt=new Date().toISOString();
+      const idx=arr.findIndex(x=>x.invNo===data.invNo); if(idx>=0) arr[idx]=data; else arr.unshift(data);
+      setInvoices(arr); renderHistory(); toast(t("saved"));
     }
 
     function loadInvoice(data){
@@ -780,8 +717,8 @@
         <div class="hitem">
           <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
             <div>
-              <div style="font-weight:900">${x.invNo || "—"}</div>
-              <div style="font-size:12px;color:#7b6b4a">${x.cName || "—"} • ${x.invDate || ""}</div>
+              <div style="font-weight:900">${x.invNo || "-"}</div>
+              <div style="font-size:12px;color:#7b6b4a">${x.cName || "-"} • ${x.invDate || ""}</div>
               <div style="font-size:12px;color:#7b6b4a">SAR ${money(x.grand || 0)}</div>
             </div>
             <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end">
@@ -800,18 +737,16 @@
     }
 
     function deleteHistoryIndex(i){
-      if(!safeConfirm(t("confirmDel"))) return;
+      if(!confirm(t("confirmDel"))) return;
       const arr=getInvoices(), q=($("histQ").value || "").toLowerCase().trim();
       const filtered=arr.filter(x=>{ const hay=[x.invNo,x.cName,x.cPhone,x.shop].join(" ").toLowerCase(); return !q || hay.includes(q); });
       const target=filtered[i]; if(!target) return; setInvoices(arr.filter(x=>x.invNo!==target.invNo)); renderHistory();
     }
 
     function exportBackup(){
-      try{
-        const payload={settings:JSON.parse(getLS("au.settings")||"{}"), logo:getLS("au.logo")||null, counter:getLS("au.cnt")||"1", invoices:getInvoices()};
-        const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
-        const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="AURAGoldZATCAProBackup.json"; document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); },1000);
-      }catch(e){ alert("Export failed: "+e.message); }
+      const payload={settings:JSON.parse(getLS("au.settings")||"{}"), logo:getLS("au.logo")||null, counter:getLS("au.cnt")||"1", invoices:getInvoices()};
+      const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+      const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="AURAGoldZATCAProBackup.json"; a.click(); URL.revokeObjectURL(a.href);
     }
 
     function onImport(input){
@@ -833,7 +768,7 @@
 
     async function previewScanData(){
       const d=getData(); const payload=buildZatcaBase64(d);
-      alert("ZATCA Base64 QR Payload:\n\n" + payload + "\n\nHuman-readable invoice data:\n\n" + buildScanText(d));
+      alert("ZATCA Base64 QR Payload:\n\n" + payload + "\n\n" + "Human-readable invoice data:\n\n" + buildScanText(d));
     }
 
     async function doPrint(){
@@ -841,35 +776,23 @@
       const d=getData();
       let qrImg="";
       try{
-        if(d.showQr && typeof QRCode!=="undefined"){ qrImg=await getQRCodeImage(d); }
+        if(d.showQr && typeof QRCode!=="undefined") qrImg=await getQRCodeImage(d);
       }catch(e){ qrImg=""; }
 
       const invHTML=buildInvHTML(d,qrImg);
+      $("invOut").innerHTML=invHTML;
+
       const pa=$("printArea");
       pa.innerHTML=invHTML;
       pa.style.display="block";
 
-      // Also update preview
-      $("invOut").innerHTML=invHTML;
-
+      // iOS Safari needs a real delay after DOM update before print
       setTimeout(function(){
-        try{
-          window.print();
-        }catch(err){
-          alert("Print not supported in this browser. Use Share → Print.");
-        }
-        // After print (or cancel), hide printArea again
-        setTimeout(function(){
-          pa.style.display="none";
-        }, 1000);
-      }, 300);
+        try{ window.print(); }catch(err){}
+        // hide after print dialog opens
+        setTimeout(function(){ pa.style.display="none"; }, 2000);
+      }, 600);
     }
-
-    // After print cleanup for iOS
-    window.addEventListener("afterprint", function(){
-      var pa=$("printArea");
-      if(pa) pa.style.display="none";
-    });
 
     function newInvoice(){
       $("invNo").value=useInvoiceNo(); $("invDate").value=nowLocal(); $("custName").value=""; $("custPhone").value="";
@@ -879,7 +802,6 @@
 
     $("langSel").addEventListener("change",e=>setLang(e.target.value));
 
-    // ── App Init ──
     try{
       loadSettings();
       restorePanels();
@@ -894,7 +816,7 @@
       renderHistory();
     }catch(e){
       console.error("App init failed:",e);
-      alert("App failed to initialize: "+e.message+". Please reopen the file.");
+      alert("App failed to load on this device. Please reopen the file in Chrome and allow internet access.");
     }
   </script>
 </body>
