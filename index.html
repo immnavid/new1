@@ -73,12 +73,11 @@
     .istrip{height:5px;background:linear-gradient(90deg,#7a5c1e,#c9a84c 30%,#f5e6c0 50%,#c9a84c 70%,#7a5c1e)}
     .ibody{padding:7mm 9mm}
     .ihdr{display:flex;justify-content:space-between;align-items:flex-start;gap:6mm;padding-bottom:5mm;border-bottom:1.5px solid #c9a84c;margin-bottom:4mm}
-    .isbl{display:flex;align-items:flex-start;gap:3mm}
+    .isbl{display:flex;align-items:center;gap:3mm}
     .ilogo,.ilogoph{width:64px;height:64px;border-radius:10px;border:none;flex-shrink:0;background:#fff}
-    .ilogo{object-fit:cover}
-    .ilogoph{background:linear-gradient(135deg,#f5e6c0,#c9a84c,#7a5c1e);display:grid;place-items:center;font-size:24px;font-weight:900;color:#0a0a0a}
+    .ilogo{object-fit:cover;display:block;margin:0 auto}
+    .ilogoph{background:linear-gradient(135deg,#f5e6c0,#c9a84c,#7a5c1e);display:grid;place-items:center;font-size:24px;font-weight:900;color:#0a0a0a;margin:0 auto}
     .isname{font-size:19px;font-weight:900;color:#0a0a0a}
-    .issub{font-size:9px;color:#a07830;letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
     .isinfo{font-size:9px;color:#5a4a2a;margin-top:4px;line-height:1.9}
     .itblock{text-align:right}
     .ibadge{display:inline-block;background:linear-gradient(135deg,#0a0a0a,#251e0a);color:#f5e6c0;font-size:11px;font-weight:900;padding:6px 12px;border-radius:7px;letter-spacing:.4px;border:1px solid #c9a84c;margin-bottom:5px}
@@ -333,16 +332,16 @@
   (function(){
     var QR_LOADING=false;
     function loadQRLib(cb){
-      if(typeof QRCode!=="undefined"){ cb&&cb(); return; }
-      if(QR_LOADING){ setTimeout(function(){ loadQRLib(cb); },300); return; }
+      if(typeof QRCode!=="undefined"){cb&&cb();return;}
+      if(QR_LOADING){setTimeout(function(){loadQRLib(cb);},300);return;}
       QR_LOADING=true;
       var s=document.createElement("script");
       s.src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js";
-      s.onload=function(){ QR_LOADING=false; document.getElementById("qrLibStatus").style.display="none"; cb&&cb(); };
-      s.onerror=function(){ QR_LOADING=false; var st=document.getElementById("qrLibStatus"); st.style.display="block"; st.textContent="⚠️ QR library failed to load. Check internet and reload."; };
+      s.onload=function(){QR_LOADING=false;document.getElementById("qrLibStatus").style.display="none";cb&&cb();};
+      s.onerror=function(){QR_LOADING=false;var st=document.getElementById("qrLibStatus");st.style.display="block";st.textContent="⚠️ QR library failed to load. Check internet and reload.";};
       document.head.appendChild(s);
     }
-    loadQRLib(function(){ if(typeof renderInvoice==="function") renderInvoice(); });
+    loadQRLib(function(){if(typeof renderInvoice==="function")renderInvoice();});
   })();
   </script>
 
@@ -359,17 +358,17 @@
         lPaidLbl:"Paid",lBal:"Balance Due",lPreview:"Invoice Preview",lHistory:"Invoice History",
         lTools:"Tools",lImport:"Import",lNewNo:"New No.",lExport:"Export Backup (JSON)",lSave:"Save",
         lNew:"New",lPrint:"Print",confirmNew:"Start a new invoice?",confirmDel:"Delete this invoice?",
-        saved:"Invoice Saved!",imported:"Imported!",amountWords:"Amount in Words",
+        saved:"Invoice Saved!",imported:"Imported!",
         lItemType:"Item Type",lKarat:"Karat",lUnit:"Unit",lQty:"Qty",lWeight:"Weight (g)",lRateG:"Rate/g",
         lMaking:"Making",lDiscount:"Discount",lApplyVat:"Apply VAT",lTotalWt:"Total Wt",lPreVat:"Pre-VAT",
         lVatLbl:"VAT",lItemTotal:"Item Total",lCopy:"Copy",lDel:"Delete",lNoSaved:"No saved invoices",lLoad:"Load",
         Ring:"Ring",Bracelet:"Bracelet",Chain:"Chain",Necklace:"Necklace",Earrings:"Earrings",Pendant:"Pendant",Bullion:"Bullion",Other:"Other",
         "24K":"24K","22K":"22K","21K":"21K","18K":"18K","14K":"14K",
         Gram:"Gram",Piece:"Piece",Carat:"Carat",Cash:"Cash",Card:"Card",Transfer:"Bank Transfer",Mixed:"Mixed",Credit:"Credit",
-        iShop:"Gold Jewellery",iSale:"Simplified Tax Invoice",iInv:"Invoice",iDate:"Date",iPay:"Payment",
+        iSale:"Simplified Tax Invoice",iInv:"Invoice",iDate:"Date",iPay:"Payment",
         iCust:"Customer",iPhoneLbl:"Phone",iVatR:"VAT Rate",iVatN:"VAT No.",iItem:"Item",iWt:"Wt (g)",iRate:"Rate",
         iPreV:"Pre-VAT",iVat:"VAT",iTotal:"Total",iDisc:"Discount",iNet:"Net Amount",iVatOnly:"VAT Amount",
-        iGrandWithVat:"Total Including VAT",iPaid:"Paid",iBal:"Balance Due",iExp:"Expense",iThanks:"Thank you for your business.",iSig:"Authorized Signature"
+        iGrandWithVat:"Total Including VAT",iPaid:"Paid",iBal:"Balance Due",iThanks:"Thank you for your business.",iSig:"Authorized Signature"
       },
       ar:{
         appTitle:"متجر الذهب",appSub:"فاتورة ضريبية مبسطة",
@@ -382,17 +381,17 @@
         lPaidLbl:"المدفوع",lBal:"المتبقي",lPreview:"معاينة الفاتورة",lHistory:"سجل الفواتير",
         lTools:"الأدوات",lImport:"استيراد",lNewNo:"رقم جديد",lExport:"تصدير نسخة احتياطية (JSON)",lSave:"حفظ",
         lNew:"جديد",lPrint:"طباعة",confirmNew:"بدء فاتورة جديدة؟",confirmDel:"حذف هذه الفاتورة؟",
-        saved:"تم حفظ الفاتورة!",imported:"تم الاستيراد!",amountWords:"المبلغ كتابة",
+        saved:"تم حفظ الفاتورة!",imported:"تم الاستيراد!",
         lItemType:"نوع الصنف",lKarat:"العيار",lUnit:"الوحدة",lQty:"الكمية",lWeight:"الوزن (جم)",lRateG:"سعر/جم",
         lMaking:"المصنعية",lDiscount:"الخصم",lApplyVat:"تطبيق الضريبة",lTotalWt:"إجمالي الوزن",lPreVat:"قبل الضريبة",
         lVatLbl:"الضريبة",lItemTotal:"إجمالي الصنف",lCopy:"نسخ",lDel:"حذف",lNoSaved:"لا توجد فواتير محفوظة",lLoad:"تحميل",
         Ring:"خاتم",Bracelet:"سوار",Chain:"سلسلة",Necklace:"عقد",Earrings:"أقراط",Pendant:"تعليقة",Bullion:"سبيكة",Other:"أخرى",
         "24K":"24 عيار","22K":"22 عيار","21K":"21 عيار","18K":"18 عيار","14K":"14 عيار",
         Gram:"جرام",Piece:"قطعة",Carat:"قيراط",Cash:"نقداً",Card:"بطاقة",Transfer:"تحويل بنكي",Mixed:"مختلط",Credit:"آجل",
-        iShop:"مجوهرات ذهبية",iSale:"فاتورة ضريبية مبسطة",iInv:"الفاتورة",iDate:"التاريخ",iPay:"الدفع",
+        iSale:"فاتورة ضريبية مبسطة",iInv:"الفاتورة",iDate:"التاريخ",iPay:"الدفع",
         iCust:"العميل",iPhoneLbl:"الهاتف",iVatR:"نسبة الضريبة",iVatN:"الرقم الضريبي",iItem:"الصنف",iWt:"الوزن",iRate:"السعر",
         iPreV:"قبل الضريبة",iVat:"الضريبة",iTotal:"الإجمالي",iDisc:"الخصم",iNet:"الصافي",iVatOnly:"ضريبة القيمة المضافة",
-        iGrandWithVat:"المجموع شامل ضريبة القيمة المضافة",iPaid:"المدفوع",iBal:"المتبقي",iExp:"المصروف",iThanks:"شكراً لتعاملكم معنا.",iSig:"توقيع المفوض"
+        iGrandWithVat:"المجموع شامل ضريبة القيمة المضافة",iPaid:"المدفوع",iBal:"المتبقي",iThanks:"شكراً لتعاملكم معنا.",iSig:"توقيع المفوض"
       }
     };
 
@@ -421,29 +420,21 @@
     function safeConfirm(msg){try{return window.confirm(msg);}catch(e){return true;}}
     function confirmNewInvoice(){if(safeConfirm(TL.confirmNew))newInvoice();}
 
-    // ══ SHOP LOCK SYSTEM ══
-    // Change this to your own secret password:
+    // ══ SHOP LOCK — Change password below ══
     const ADMIN_PASSWORD="aura2024";
-
     function isShopLocked(){return getLS("au.shoplock")==="1";}
-
     function applyLockState(){
       const locked=isShopLocked();
-      const banner=$("shopLockBanner");
-      const fields=$("shopFields");
+      const banner=$("shopLockBanner"),fields=$("shopFields");
       if(locked){
-        banner.style.display="flex";
-        fields.classList.add("locked-overlay");
+        banner.style.display="flex";fields.classList.add("locked-overlay");
         fields.querySelectorAll("input,select,textarea,button").forEach(el=>el.setAttribute("disabled","disabled"));
       }else{
-        banner.style.display="none";
-        fields.classList.remove("locked-overlay");
+        banner.style.display="none";fields.classList.remove("locked-overlay");
         fields.querySelectorAll("input,select,textarea,button").forEach(el=>el.removeAttribute("disabled"));
       }
     }
-
     function lockShop(){saveLS("au.shoplock","1");applyLockState();toast("🔒 Shop info locked!");}
-
     function unlockShop(){
       const pwd=prompt("Enter admin password:");
       if(pwd===null)return;
@@ -457,36 +448,15 @@
     function renderItems(){
       const host=$("itemsHost");host.innerHTML="";$("itemCnt").textContent=items.length;const vr=nVal($("vatRate").value)/100;
       items.forEach((it,i)=>{
-        const m=itemMath(it,vr);
-        const el=document.createElement("div");
-        el.className="icard";
-        el.innerHTML=`
-          <div class="ihead">
-            <span class="inum">${t("lItems")} ${i+1}</span>
-            <div style="display:flex;gap:6px">
-              <button class="sm lt au" data-cp>${t("lCopy")}</button>
-              <button class="sm rd au" data-dl>${t("lDel")}</button>
-            </div>
-          </div>
+        const m=itemMath(it,vr);const el=document.createElement("div");el.className="icard";
+        el.innerHTML=`<div class="ihead"><span class="inum">${t("lItems")} ${i+1}</span><div style="display:flex;gap:6px"><button class="sm lt au" data-cp>${t("lCopy")}</button><button class="sm rd au" data-dl>${t("lDel")}</button></div></div>
           <div class="g1">
             <div><span class="lbl">${t("lItemType")}</span><select data-f="tp">${TYPES.map(v=>`<option value="${v}" ${it.tp===v?"selected":""}>${t(v)}</option>`).join("")}</select></div>
-            <div class="g2">
-              <div><span class="lbl">${t("lKarat")}</span><select data-f="kt">${KT.map(v=>`<option value="${v}" ${it.kt===v?"selected":""}>${t(v)}</option>`).join("")}</select></div>
-              <div><span class="lbl">${t("lUnit")}</span><select data-f="un">${UN.map(v=>`<option value="${v}" ${it.un===v?"selected":""}>${t(v)}</option>`).join("")}</select></div>
-            </div>
-            <div class="g2">
-              <div><span class="lbl">${t("lQty")}</span><input data-f="qty" type="number" min="0" step="0.01" value="${it.qty}" /></div>
-              <div><span class="lbl">${t("lWeight")}</span><input data-f="wt" type="number" min="0" step="0.001" value="${it.wt}" /></div>
-            </div>
+            <div class="g2"><div><span class="lbl">${t("lKarat")}</span><select data-f="kt">${KT.map(v=>`<option value="${v}" ${it.kt===v?"selected":""}>${t(v)}</option>`).join("")}</select></div><div><span class="lbl">${t("lUnit")}</span><select data-f="un">${UN.map(v=>`<option value="${v}" ${it.un===v?"selected":""}>${t(v)}</option>`).join("")}</select></div></div>
+            <div class="g2"><div><span class="lbl">${t("lQty")}</span><input data-f="qty" type="number" min="0" step="0.01" value="${it.qty}" /></div><div><span class="lbl">${t("lWeight")}</span><input data-f="wt" type="number" min="0" step="0.001" value="${it.wt}" /></div></div>
             <div class="srow n"><span>${t("lTotalWt")}</span><strong>${num3(m.totalWt)} ${L==="ar"?"جم":"g"}</strong></div>
-            <div class="g2">
-              <div><span class="lbl">${t("lRateG")}</span><input data-f="rate" type="number" min="0" step="0.01" value="${it.rate}" /></div>
-              <div><span class="lbl">${t("lMaking")}</span><input data-f="mkg" type="number" min="0" step="0.01" value="${it.mkg}" /></div>
-            </div>
-            <div class="g2">
-              <div><span class="lbl">${t("lDiscount")}</span><input data-f="disc" type="number" min="0" step="0.01" value="${it.disc}" /></div>
-              <div><label class="chk" style="margin-top:18px"><input data-f="vat" type="checkbox" ${it.vat?"checked":""} /><span>${t("lApplyVat")}</span></label></div>
-            </div>
+            <div class="g2"><div><span class="lbl">${t("lRateG")}</span><input data-f="rate" type="number" min="0" step="0.01" value="${it.rate}" /></div><div><span class="lbl">${t("lMaking")}</span><input data-f="mkg" type="number" min="0" step="0.01" value="${it.mkg}" /></div></div>
+            <div class="g2"><div><span class="lbl">${t("lDiscount")}</span><input data-f="disc" type="number" min="0" step="0.01" value="${it.disc}" /></div><div><label class="chk" style="margin-top:18px"><input data-f="vat" type="checkbox" ${it.vat?"checked":""} /><span>${t("lApplyVat")}</span></label></div></div>
             <div class="srow n"><span>${t("lPreVat")}</span><strong>SAR ${money(m.preVat)}</strong></div>
             <div class="srow n"><span>${t("lVatLbl")}</span><strong>SAR ${money(m.vatAmt)}</strong></div>
             <div class="srow t"><span>${t("lItemTotal")}</span><strong>SAR ${money(m.total)}</strong></div>
@@ -507,8 +477,7 @@
     function duplicateLastItem(){if(!items.length)return;items.push(mkItem({...items[items.length-1]}));renderItems();calc();}
 
     function calc(){
-      const vr=nVal($("vatRate").value)/100;
-      let sub=0,tax=0,vat=0,discTotal=0;
+      const vr=nVal($("vatRate").value)/100;let sub=0,tax=0,vat=0,discTotal=0;
       items.forEach(it=>{const m=itemMath(it,vr);sub+=m.preVat;discTotal+=nVal(it.disc);if(it.vat)tax+=m.preVat;vat+=m.vatAmt;});
       const exp=nVal($("expAmt").value),grand=sub+vat+exp,paid=nVal($("paidAmt").value),bal=grand-paid;
       $("dSub").textContent=`SAR ${money(sub)}`;$("dTax").textContent=`SAR ${money(tax)}`;$("dVat").textContent=`SAR ${money(vat)}`;
@@ -517,10 +486,10 @@
     }
 
     function socialIcon(name){
-      const common='width="12" height="12" viewBox="0 0 24 24" fill="currentColor"';
-      if(name==='instagram')return `<svg ${common}><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zM18 6.3a1.2 1.2 0 1 1-1.2 1.2A1.2 1.2 0 0 1 18 6.3z"/></svg>`;
-      if(name==='tiktok')return `<svg ${common}><path d="M16.5 2h2.7a5.8 5.8 0 0 0 2.8 3.1v2.8a8.5 8.5 0 0 1-3.3-.8v6.4a6.5 6.5 0 1 1-6.5-6.5c.3 0 .6 0 .9.1v2.8a3.7 3.7 0 1 0 2.8 3.6V2z"/></svg>`;
-      if(name==='snapchat')return `<svg ${common}><path d="M12 2c2.7 0 4.8 2.2 4.8 4.9 0 .7-.1 1.4-.4 2 .5.8 1.2 1.4 2.1 1.7.4.1.7.5.7.9s-.3.8-.7.9c-.6.2-1.2.3-1.8.4-.1.5-.2 1 .3 1.4.2.2.3.4.3.7 0 .5-.4 1-.9 1-.9 0-1.7-.3-2.4-.8-.6.3-1.3.5-2 .5s-1.4-.2-2-.5c-.7.5-1.5.8-2.4.8-.5 0-.9-.5-.9-1 0-.3.1-.5.3-.7.5-.4.4-.9.3-1.4-.6-.1-1.2-.2-1.8-.4-.4-.1-.7-.5-.7-.9s.3-.8.7-.9c.9-.3 1.6-.9 2.1-1.7-.3-.6-.4-1.3-.4-2C7.2 4.2 9.3 2 12 2z"/></svg>`;
+      const c='width="12" height="12" viewBox="0 0 24 24" fill="currentColor"';
+      if(name==='instagram')return `<svg ${c}><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zM18 6.3a1.2 1.2 0 1 1-1.2 1.2A1.2 1.2 0 0 1 18 6.3z"/></svg>`;
+      if(name==='tiktok')return `<svg ${c}><path d="M16.5 2h2.7a5.8 5.8 0 0 0 2.8 3.1v2.8a8.5 8.5 0 0 1-3.3-.8v6.4a6.5 6.5 0 1 1-6.5-6.5c.3 0 .6 0 .9.1v2.8a3.7 3.7 0 1 0 2.8 3.6V2z"/></svg>`;
+      if(name==='snapchat')return `<svg ${c}><path d="M12 2c2.7 0 4.8 2.2 4.8 4.9 0 .7-.1 1.4-.4 2 .5.8 1.2 1.4 2.1 1.7.4.1.7.5.7.9s-.3.8-.7.9c-.6.2-1.2.3-1.8.4-.1.5-.2 1 .3 1.4.2.2.3.4.3.7 0 .5-.4 1-.9 1-.9 0-1.7-.3-2.4-.8-.6.3-1.3.5-2 .5s-1.4-.2-2-.5c-.7.5-1.5.8-2.4.8-.5 0-.9-.5-.9-1 0-.3.1-.5.3-.7.5-.4.4-.9.3-1.4-.6-.1-1.2-.2-1.8-.4-.4-.1-.7-.5-.7-.9s.3-.8.7-.9c.9-.3 1.6-.9 2.1-1.7-.3-.6-.4-1.3-.4-2C7.2 4.2 9.3 2 12 2z"/></svg>`;
       return '';
     }
 
@@ -528,9 +497,9 @@
       num=Math.round((Number(num)||0)*100)/100;
       const ones=["Zero","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"];
       const tens=["","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"];
-      function below1000(n){let str="";if(n>=100){str+=ones[Math.floor(n/100)]+" Hundred ";n%=100;}if(n>=20){str+=tens[Math.floor(n/10)]+" ";n%=10;}if(n>0)str+=ones[n]+" ";return str.trim();}
-      function w2w(n){if(n===0)return"Zero";let p=[];if(n>=1000000){p.push(below1000(Math.floor(n/1000000))+" Million");n%=1000000;}if(n>=1000){p.push(below1000(Math.floor(n/1000))+" Thousand");n%=1000;}if(n>0)p.push(below1000(n));return p.join(" ").trim();}
-      const whole=Math.floor(num),frac=Math.round((num-whole)*100);let out=w2w(whole)+" Saudi Riyals";if(frac>0)out+=" and "+w2w(frac)+" Halalas";return out+" Only";
+      function b1000(n){let s="";if(n>=100){s+=ones[Math.floor(n/100)]+" Hundred ";n%=100;}if(n>=20){s+=tens[Math.floor(n/10)]+" ";n%=10;}if(n>0)s+=ones[n]+" ";return s.trim();}
+      function w2w(n){if(n===0)return"Zero";let p=[];if(n>=1000000){p.push(b1000(Math.floor(n/1000000))+" Million");n%=1000000;}if(n>=1000){p.push(b1000(Math.floor(n/1000))+" Thousand");n%=1000;}if(n>0)p.push(b1000(n));return p.join(" ").trim();}
+      const wh=Math.floor(num),fr=Math.round((num-wh)*100);let o=w2w(wh)+" Saudi Riyals";if(fr>0)o+=" and "+w2w(fr)+" Halalas";return o+" Only";
     }
 
     function numberToWordsAr(num){
@@ -542,10 +511,10 @@
       function b100(n){if(n===0)return"صفر";if(n<10)return ones[n];if(n===10)return"عشرة";if(n>10&&n<20)return teens[n-10];if(n%10===0)return tens[Math.floor(n/10)];return ones[n%10]+" و "+tens[Math.floor(n/10)];}
       function b1000(n){if(n<100)return b100(n);if(n%100===0)return hundreds[Math.floor(n/100)];return hundreds[Math.floor(n/100)]+" و "+b100(n%100);}
       function w2w(n){if(n===0)return"صفر";let p=[];if(n>=1000000){const m=Math.floor(n/1000000);if(m===1)p.push("مليون");else if(m===2)p.push("مليونان");else if(m<=10)p.push(b1000(m)+" ملايين");else p.push(b1000(m)+" مليون");n%=1000000;}if(n>=1000){const th=Math.floor(n/1000);if(th===1)p.push("ألف");else if(th===2)p.push("ألفان");else if(th<=10)p.push(b1000(th)+" آلاف");else p.push(b1000(th)+" ألف");n%=1000;}if(n>0)p.push(b1000(n));return p.join(" و ").trim();}
-      const whole=Math.floor(num),frac=Math.round((num-whole)*100);let out=w2w(whole)+" ريال سعودي";if(frac>0)out+=" و "+w2w(frac)+" هللة";return out+" فقط";
+      const wh=Math.floor(num),fr=Math.round((num-wh)*100);let o=w2w(wh)+" ريال سعودي";if(fr>0)o+=" و "+w2w(fr)+" هللة";return o+" فقط";
     }
 
-    function getAmountInWords(amount){return{en:numberToWordsEn(amount),ar:numberToWordsAr(amount)};}
+    function getAmountInWords(a){return{en:numberToWordsEn(a),ar:numberToWordsAr(a)};}
 
     function getData(){
       const vr=nVal($("vatRate").value)/100,vr100=nVal($("vatRate").value);
@@ -559,33 +528,20 @@
         shopCr:$("shopCr").value,shopMetalLic:$("shopMetalLic").value,shopDisclaimer:$("shopDisclaimer").value,
         insta:$("shopInsta").value,tiktok:$("shopTiktok").value,snap:$("shopSnap").value,
         logo:getLS("au.logo")||"",
-        invNo:$("invNo").value,rawDate:$("invDate").value,
-        invDate:$("invDate").value.replace("T"," "),
+        invNo:$("invNo").value,rawDate:$("invDate").value,invDate:$("invDate").value.replace("T"," "),
         cName:$("custName").value||"—",cPhone:$("custPhone").value,
         vr,vr100,sub,tax,vat,exp,grand,paid,bal,discTotal,
-        pay:t(payRaw),payRaw,
-        notes:$("notes").value,showQr:$("showQr").checked,
+        pay:t(payRaw),payRaw,notes:$("notes").value,showQr:$("showQr").checked,
         items:[...items],isRTL:L==="ar"
       };
     }
 
-    function toISOForZATCA(raw){
-      try{if(!raw)return new Date().toISOString();const d=new Date(raw.includes("T")?raw:raw.replace(" ","T"));return isNaN(d.getTime())?new Date().toISOString():d.toISOString();}catch(e){return new Date().toISOString();}
-    }
+    function toISOForZATCA(raw){try{if(!raw)return new Date().toISOString();const d=new Date(raw.includes("T")?raw:raw.replace(" ","T"));return isNaN(d.getTime())?new Date().toISOString():d.toISOString();}catch(e){return new Date().toISOString();}}
     function tlvField(tag,val){const v=enc(val||"");const tg=new Uint8Array([tag]);const l=new Uint8Array([v.length]);return new Uint8Array([...tg,...l,...v]);}
     function concatBytes(parts){const len=parts.reduce((s,p)=>s+p.length,0);const out=new Uint8Array(len);let off=0;parts.forEach(p=>{out.set(p,off);off+=p.length;});return out;}
     function bytesToBase64(bytes){let bin="";bytes.forEach(b=>bin+=String.fromCharCode(b));return btoa(bin);}
     function buildZatcaBase64(d){const ts=toISOForZATCA(d.rawDate);const payload=concatBytes([tlvField(1,d.shop),tlvField(2,d.vatNo),tlvField(3,ts),tlvField(4,money(d.grand)),tlvField(5,money(d.vat))]);return bytesToBase64(payload);}
-
-    function buildScanText(d){
-      const lines=[];
-      lines.push(`Seller: ${d.shop}`);lines.push(`VAT No: ${d.vatNo||"—"}`);lines.push(`Invoice No: ${d.invNo}`);lines.push(`Date: ${d.invDate}`);
-      lines.push(`Customer: ${d.cName}`);lines.push(`Phone: ${d.cPhone||"—"}`);lines.push(`Payment: ${d.pay}`);
-      lines.push(`Subtotal: SAR ${money(d.sub)}`);lines.push(`VAT (${d.vr100}%): SAR ${money(d.vat)}`);
-      if(d.exp>0)lines.push(`Expense: SAR ${money(d.exp)}`);
-      lines.push(`Grand Total: SAR ${money(d.grand)}`);lines.push(`Paid: SAR ${money(d.paid)}`);lines.push(`Balance: SAR ${money(d.bal)}`);
-      return lines.join("\n");
-    }
+    function buildScanText(d){const lines=[];lines.push(`Seller: ${d.shop}`);lines.push(`VAT No: ${d.vatNo||"—"}`);lines.push(`Invoice No: ${d.invNo}`);lines.push(`Date: ${d.invDate}`);lines.push(`Grand Total: SAR ${money(d.grand)}`);lines.push(`VAT: SAR ${money(d.vat)}`);return lines.join("\n");}
 
     function generateQRDataURL(text,size){
       size=size||220;
@@ -597,30 +553,15 @@
           document.body.appendChild(box);
           new QRCode(box,{text:String(text||" "),width:size,height:size,colorDark:"#000000",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M});
           var tries=0;
-          function attempt(){
-            tries++;
-            try{
-              var img=box.querySelector("img"),canvas=box.querySelector("canvas"),dataURL="";
-              if(canvas)dataURL=canvas.toDataURL("image/png");
-              else if(img&&img.src&&img.src.startsWith("data:"))dataURL=img.src;
-              if(dataURL&&dataURL.length>100){box.remove();resolve(dataURL);}
-              else if(tries<15)setTimeout(attempt,100);
-              else{box.remove();reject(new Error("QR timeout"));}
-            }catch(e){box.remove();reject(e);}
-          }
+          function attempt(){tries++;try{var img=box.querySelector("img"),canvas=box.querySelector("canvas"),dataURL="";if(canvas)dataURL=canvas.toDataURL("image/png");else if(img&&img.src&&img.src.startsWith("data:"))dataURL=img.src;if(dataURL&&dataURL.length>100){box.remove();resolve(dataURL);}else if(tries<15)setTimeout(attempt,100);else{box.remove();reject(new Error("QR timeout"));}}catch(e){box.remove();reject(e);}}
           setTimeout(attempt,150);
         }catch(e){reject(e);}
       });
     }
-
     async function getQRCodeImage(d){return await generateQRDataURL(buildZatcaBase64(d),220);}
 
     function buildInvHTML(d,qrImgSrc){
-      const rows=d.items.map((it,i)=>{
-        const m=itemMath(it,d.vr);
-        const desc=`${t(it.tp)} ${t(it.kt)}${nVal(it.qty)!==1?" × "+it.qty:""}`;
-        return `<tr><td style="white-space:normal"><span class="ibadge2">${i+1}</span>${desc}</td><td>${num3(m.totalWt)}</td><td>${money(it.rate)}</td><td>${money(m.preVat)}</td><td>${money(m.vatAmt)}</td><td>${money(m.total)}</td></tr>`;
-      }).join("");
+      const rows=d.items.map((it,i)=>{const m=itemMath(it,d.vr);const desc=`${t(it.tp)} ${t(it.kt)}${nVal(it.qty)!==1?" × "+it.qty:""}`;return `<tr><td style="white-space:normal"><span class="ibadge2">${i+1}</span>${desc}</td><td>${num3(m.totalWt)}</td><td>${money(it.rate)}</td><td>${money(m.preVat)}</td><td>${money(m.vatAmt)}</td><td>${money(m.total)}</td></tr>`;}).join("");
       const qrSlot=d.showQr&&qrImgSrc?`<div class="iqrb"><img src="${qrImgSrc}" alt="QR" width="110" height="110"></div>`:"";
       const smParts=[];
       if(d.insta)smParts.push(`<span class="soc"><span class="soc-ico">${socialIcon("instagram")}</span><span>${d.insta}</span></span>`);
@@ -639,8 +580,8 @@
         <div class="ibody ${d.isRTL?"inv-rtl":""}">
           <div class="ihdr">
             <div class="isbl">
-              ${d.logo?`<img src="${d.logo}" class="ilogo" alt="">`:`<div class="ilogoph">${d.shopChar}</div>`}
-              <div><div class="isname">${d.shop}</div><div class="issub">${t("iShop")}</div><div class="isinfo">${infoBits}</div></div>
+              ${d.logo?`<img src="${d.logo}" class="ilogo" alt="">` :`<div class="ilogoph">${d.shopChar}</div>`}
+              <div><div class="isname">${d.shop}</div><div class="isinfo">${infoBits}</div></div>
             </div>
             <div class="itblock">
               <div class="ibadge">${t("iSale")}</div>
@@ -688,17 +629,14 @@
     async function renderInvoice(){
       clearTimeout(_rit);
       _rit=setTimeout(async function(){
-        const d=getData();
-        let qrImg="";
+        const d=getData();let qrImg="";
         try{if(d.showQr&&typeof QRCode!=="undefined")qrImg=await getQRCodeImage(d);}catch(e){qrImg="";}
-        $("invOut").innerHTML=buildInvHTML(d,qrImg);
-        updateBrand();
+        $("invOut").innerHTML=buildInvHTML(d,qrImg);updateBrand();
       },80);
     }
 
     function updateBrand(){
-      $("appTitle").textContent=$("shopName").value||t("appTitle");
-      $("appSub").textContent=t("appSub");
+      $("appTitle").textContent=$("shopName").value||t("appTitle");$("appSub").textContent=t("appSub");
       const logo=getLS("au.logo"),box=$("logoBox");
       if(logo){box.style.backgroundImage=`url('${logo}')`;box.textContent="";}
       else{box.style.backgroundImage="none";box.textContent=(($("shopName").value||"A").trim()[0]||"A").toUpperCase();}
@@ -717,17 +655,11 @@
       try{
         const s=JSON.parse(getLS("au.settings")||"{}");
         $("shopName").value=s.shopName||"AURA Gold Shop";
-        $("shopVat").value=s.shopVat||"";
-        $("shopPhone").value=s.shopPhone||"";
-        $("shopAddr").value=s.shopAddr||"";
-        $("shopInsta").value=s.shopInsta||"";
-        $("shopTiktok").value=s.shopTiktok||"";
-        $("shopSnap").value=s.shopSnap||"";
-        $("shopCr").value=s.shopCr||"";
-        $("shopMetalLic").value=s.shopMetalLic||"";
+        $("shopVat").value=s.shopVat||"";$("shopPhone").value=s.shopPhone||"";$("shopAddr").value=s.shopAddr||"";
+        $("shopInsta").value=s.shopInsta||"";$("shopTiktok").value=s.shopTiktok||"";$("shopSnap").value=s.shopSnap||"";
+        $("shopCr").value=s.shopCr||"";$("shopMetalLic").value=s.shopMetalLic||"";
         $("shopDisclaimer").value=s.shopDisclaimer!==undefined?s.shopDisclaimer:"وزن الحجر لا يتجاوز %5 من وزنه والبضاعه المباعه لا ترد ولاتستبدل بعد خروجها من المحل الا بقصد البيع";
-        L=s.lang||"en";
-        $("langSel").value=L;
+        L=s.lang||"en";$("langSel").value=L;
       }catch(e){}
     }
 
@@ -735,18 +667,12 @@
       L=lang==="ar"?"ar":"en";TL=T[L];
       document.documentElement.lang=L;document.documentElement.dir=L==="ar"?"rtl":"ltr";
       document.querySelectorAll("[data-k]").forEach(el=>{el.textContent=t(el.dataset.k);});
-      $("appTitle").textContent=$("shopName").value||t("appTitle");
-      $("appSub").textContent=t("appSub");
+      $("appTitle").textContent=$("shopName").value||t("appTitle");$("appSub").textContent=t("appSub");
       $("payType").querySelectorAll("option").forEach(op=>op.textContent=t(op.value));
       saveSettings();renderItems();calc();renderHistory();
     }
 
-    function onLogo(input){
-      const file=input.files&&input.files[0];if(!file)return;
-      const fr=new FileReader();
-      fr.onload=e=>{saveLS("au.logo",e.target.result);updateBrand();renderInvoice();};
-      fr.readAsDataURL(file);
-    }
+    function onLogo(input){const file=input.files&&input.files[0];if(!file)return;const fr=new FileReader();fr.onload=e=>{saveLS("au.logo",e.target.result);updateBrand();renderInvoice();};fr.readAsDataURL(file);}
     function removeLogo(){try{localStorage.removeItem("au.logo");}catch(e){}updateBrand();renderInvoice();}
 
     function validate(){
@@ -757,12 +683,8 @@
 
     function saveInvoice(){
       if(!validate())return;
-      try{
-        const arr=getInvoices(),data=getData();
-        data.items=items.map(x=>({...x}));data.savedAt=new Date().toISOString();
-        const idx=arr.findIndex(x=>x.invNo===data.invNo);if(idx>=0)arr[idx]=data;else arr.unshift(data);
-        setInvoices(arr);renderHistory();toast(t("saved"));
-      }catch(e){alert("Save failed: "+e.message);}
+      try{const arr=getInvoices(),data=getData();data.items=items.map(x=>({...x}));data.savedAt=new Date().toISOString();const idx=arr.findIndex(x=>x.invNo===data.invNo);if(idx>=0)arr[idx]=data;else arr.unshift(data);setInvoices(arr);renderHistory();toast(t("saved"));}
+      catch(e){alert("Save failed: "+e.message);}
     }
 
     function loadInvoice(data){
@@ -779,86 +701,30 @@
       const q=($("histQ").value||"").toLowerCase().trim(),host=$("histHost");
       const arr=getInvoices().filter(x=>{const hay=[x.invNo,x.cName,x.cPhone,x.shop].join(" ").toLowerCase();return !q||hay.includes(q);});
       if(!arr.length){host.innerHTML=`<div class="hitem" style="text-align:center;color:#7b6b4a">${t("lNoSaved")}</div>`;return;}
-      host.innerHTML=arr.map((x,i)=>`
-        <div class="hitem">
-          <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
-            <div>
-              <div style="font-weight:900">${x.invNo||"—"}</div>
-              <div style="font-size:12px;color:#7b6b4a">${x.cName||"—"} • ${x.invDate||""}</div>
-              <div style="font-size:12px;color:#7b6b4a">SAR ${money(x.grand||0)}</div>
-            </div>
-            <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end">
-              <button class="sm lt au" onclick="loadHistoryIndex(${i})">${t("lLoad")}</button>
-              <button class="sm rd au" onclick="deleteHistoryIndex(${i})">${t("lDel")}</button>
-            </div>
-          </div>
-        </div>`).join("");
+      host.innerHTML=arr.map((x,i)=>`<div class="hitem"><div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start"><div><div style="font-weight:900">${x.invNo||"—"}</div><div style="font-size:12px;color:#7b6b4a">${x.cName||"—"} • ${x.invDate||""}</div><div style="font-size:12px;color:#7b6b4a">SAR ${money(x.grand||0)}</div></div><div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end"><button class="sm lt au" onclick="loadHistoryIndex(${i})">${t("lLoad")}</button><button class="sm rd au" onclick="deleteHistoryIndex(${i})">${t("lDel")}</button></div></div></div>`).join("");
     }
 
-    function loadHistoryIndex(i){
-      const arr=getInvoices(),q=($("histQ").value||"").toLowerCase().trim();
-      const filtered=arr.filter(x=>{const hay=[x.invNo,x.cName,x.cPhone,x.shop].join(" ").toLowerCase();return !q||hay.includes(q);});
-      if(filtered[i])loadInvoice(filtered[i]);
-    }
+    function loadHistoryIndex(i){const arr=getInvoices(),q=($("histQ").value||"").toLowerCase().trim();const filtered=arr.filter(x=>{const hay=[x.invNo,x.cName,x.cPhone,x.shop].join(" ").toLowerCase();return !q||hay.includes(q);});if(filtered[i])loadInvoice(filtered[i]);}
+    function deleteHistoryIndex(i){if(!safeConfirm(t("confirmDel")))return;const arr=getInvoices(),q=($("histQ").value||"").toLowerCase().trim();const filtered=arr.filter(x=>{const hay=[x.invNo,x.cName,x.cPhone,x.shop].join(" ").toLowerCase();return !q||hay.includes(q);});const target=filtered[i];if(!target)return;setInvoices(arr.filter(x=>x.invNo!==target.invNo));renderHistory();}
 
-    function deleteHistoryIndex(i){
-      if(!safeConfirm(t("confirmDel")))return;
-      const arr=getInvoices(),q=($("histQ").value||"").toLowerCase().trim();
-      const filtered=arr.filter(x=>{const hay=[x.invNo,x.cName,x.cPhone,x.shop].join(" ").toLowerCase();return !q||hay.includes(q);});
-      const target=filtered[i];if(!target)return;setInvoices(arr.filter(x=>x.invNo!==target.invNo));renderHistory();
-    }
+    function exportBackup(){try{const payload={settings:JSON.parse(getLS("au.settings")||"{}"),logo:getLS("au.logo")||null,counter:getLS("au.cnt")||"1",invoices:getInvoices()};const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="AURAGoldZATCAProBackup.json";document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);}catch(e){alert("Export failed: "+e.message);}}
 
-    function exportBackup(){
-      try{
-        const payload={settings:JSON.parse(getLS("au.settings")||"{}"),logo:getLS("au.logo")||null,counter:getLS("au.cnt")||"1",invoices:getInvoices()};
-        const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
-        const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="AURAGoldZATCAProBackup.json";document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);
-      }catch(e){alert("Export failed: "+e.message);}
-    }
+    function onImport(input){const file=input.files&&input.files[0];if(!file)return;const fr=new FileReader();fr.onload=e=>{try{const data=JSON.parse(e.target.result);if(data.settings)saveLS("au.settings",JSON.stringify(data.settings));if(data.logo)saveLS("au.logo",data.logo);if(data.counter)saveLS("au.cnt",String(data.counter));if(Array.isArray(data.invoices))setInvoices(data.invoices);loadSettings();setLang(L);renderHistory();toast(t("imported"));}catch(err){alert("Invalid JSON backup");}input.value="";};fr.readAsText(file);}
 
-    function onImport(input){
-      const file=input.files&&input.files[0];if(!file)return;
-      const fr=new FileReader();
-      fr.onload=e=>{
-        try{
-          const data=JSON.parse(e.target.result);
-          if(data.settings)saveLS("au.settings",JSON.stringify(data.settings));
-          if(data.logo)saveLS("au.logo",data.logo);
-          if(data.counter)saveLS("au.cnt",String(data.counter));
-          if(Array.isArray(data.invoices))setInvoices(data.invoices);
-          loadSettings();setLang(L);renderHistory();toast(t("imported"));
-        }catch(err){alert("Invalid JSON backup");}
-        input.value="";
-      };
-      fr.readAsText(file);
-    }
-
-    async function previewScanData(){
-      const d=getData();alert("ZATCA QR Payload:\n\n"+buildZatcaBase64(d)+"\n\nInvoice Data:\n\n"+buildScanText(d));
-    }
+    async function previewScanData(){const d=getData();alert("ZATCA QR:\n\n"+buildZatcaBase64(d)+"\n\nData:\n\n"+buildScanText(d));}
 
     async function doPrint(){
       if(!validate())return;
-      const d=getData();
-      let qrImg="";
+      const d=getData();let qrImg="";
       try{if(d.showQr&&typeof QRCode!=="undefined")qrImg=await getQRCodeImage(d);}catch(e){qrImg="";}
       const invHTML=buildInvHTML(d,qrImg);
       $("invOut").innerHTML=invHTML;
-      const pa=$("printArea");
-      pa.innerHTML=invHTML;
-      pa.style.display="block";
-      setTimeout(function(){
-        try{window.print();}catch(err){}
-        setTimeout(function(){pa.style.display="none";},2000);
-      },600);
+      const pa=$("printArea");pa.innerHTML=invHTML;pa.style.display="block";
+      setTimeout(function(){try{window.print();}catch(err){}setTimeout(function(){pa.style.display="none";},2000);},600);
     }
 
-    window.addEventListener("afterprint",function(){
-      try{var pa=$("printArea");if(pa)pa.style.display="none";}catch(e){}
-    });
-    window.addEventListener("focus",function(){
-      try{var pa=$("printArea");if(pa&&pa.style.display==="block")pa.style.display="none";}catch(e){}
-    });
+    window.addEventListener("afterprint",function(){try{var pa=$("printArea");if(pa)pa.style.display="none";}catch(e){}});
+    window.addEventListener("focus",function(){try{var pa=$("printArea");if(pa&&pa.style.display==="block")pa.style.display="none";}catch(e){}});
 
     function newInvoice(){
       $("invNo").value=useInvoiceNo();$("invDate").value=nowLocal();$("custName").value="";$("custPhone").value="";
@@ -869,21 +735,11 @@
     $("langSel").addEventListener("change",e=>setLang(e.target.value));
 
     try{
-      loadSettings();
-      restorePanels();
+      loadSettings();restorePanels();
       if(!getLS("au.cnt"))saveLS("au.cnt","1");
-      $("invNo").value=useInvoiceNo();
-      $("invDate").value=nowLocal();
-      items=[mkItem()];
-      setLang(L);
-      updateBrand();
-      renderItems();
-      calc();
-      renderHistory();
-      applyLockState();
-    }catch(e){
-      console.error("Init failed:",e);
-      alert("App failed to initialize: "+e.message);
-    }
+      $("invNo").value=useInvoiceNo();$("invDate").value=nowLocal();
+      items=[mkItem()];setLang(L);updateBrand();renderItems();calc();renderHistory();applyLockState();
+    }catch(e){console.error("Init failed:",e);alert("App failed to initialize: "+e.message);}
   </script>
-</body
+</body>
+</html>
